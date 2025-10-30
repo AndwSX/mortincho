@@ -1,0 +1,433 @@
+<!-- Header -->
+<div class="header">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+            <h2 class="mb-1">Registro de Ventas</h2>
+            <p class="text-secondary mb-0">Gestión de ventas con sistema de cuotas</p>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-light">
+                <i class="bi bi-download"></i> Exportar
+            </button>
+            <button class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Nueva Venta
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Grid -->
+<div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Ventas Hoy</h6>
+                        <h3 class="card-title mb-0 text-primary">$45,280</h3>
+                        <small class="text-success">
+                            <i class="bi bi-arrow-up"></i> +12.5%
+                        </small>
+                    </div>
+                    <div class="text-primary">
+                        <i class="bi bi-currency-dollar" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Cuotas Pendientes</h6>
+                        <h3 class="card-title mb-0 text-warning">127</h3>
+                        <small class="text-light">$28,450 total</small>
+                    </div>
+                    <div class="text-warning">
+                        <i class="bi bi-clock-history" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Entradas Cobradas</h6>
+                        <h3 class="card-title mb-0 text-success">89</h3>
+                        <small class="text-success">
+                            <i class="bi bi-arrow-up"></i> +8.2%
+                        </small>
+                    </div>
+                    <div class="text-success">
+                        <i class="bi bi-check-circle" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Tasa Cobranza</h6>
+                        <h3 class="card-title mb-0 text-info">94.2%</h3>
+                        <div class="progress mt-2">
+                            <div class="progress-bar" style="width: 94.2%"></div>
+                        </div>
+                    </div>
+                    <div class="text-info">
+                        <i class="bi bi-graph-up" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Filters and Search -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="search-container">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" class="form-control search-input" placeholder="Buscar ventas...">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="filter-tabs d-flex">
+            <select class="filter-tab flex-fill me-2" name="estados">
+                <option>Todos los estados</option>
+                <option>Activas</option>
+                <option>Completadas</option>
+                <option>Vencidas</option>
+            </select>
+            <select class="filter-tab flex-fill me-2" name="fecha">
+                <option>Último mes</option>
+                <option>Última semana</option>
+                <option>Hoy</option>
+                <option>Personalizado</option>
+            </select>
+            <button class="filter-tab active flex-fill">Filtros</button>
+        </div>
+    </div>
+</div>
+
+<!-- Seccion con la lista de las ventas -->
+<div class="table-container mb-4">
+    <div class="table-responsive">
+        <table class="table table-dark table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>ID Venta</th>
+                    <th><i class="bi bi-person me-2"></i>Cliente</th>
+                    <th><i class="bi bi-box me-2"></i>Producto</th>
+                    <th>Total</th>
+                    <th>Entrada</th>
+                    <th><i class="bi bi-hash me-2"></i>Cuotas</th>
+                    <th>Estado</th>
+                    <th>Progreso</th>
+                    <th><i class="bi bi-three-dots me-2"></i>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>#VT-2024-001</strong></td>
+                    <td>
+                        <div>
+                            <strong>María González</strong>
+                            <br><small class="text-muted">maria-gmail.com</small>
+                        </div>
+                    </td>
+                    <td>Smartphone Galaxy S24</td>
+                    <td><strong>$1,200.00</strong></td>
+                    <td>
+                        <span class="badge badge-entrada">$400.00</span>
+                    </td>
+                    <td>8 x $100.00</td>
+                    <td><span class="badge badge-pagado">Activa</span></td>
+                    <td>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar" style="width: 62.5%"></div>
+                        </div>
+                        <small class="text-muted">5/8 cuotas</small>
+                    </td>
+                    <td>
+                        <button class="action-btn" title="Ver">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="action-btn" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#VT-2024-002</strong></td>
+                    <td>
+                        <div>
+                            <strong>Carlos Rodríguez</strong>
+                            <br><small class="text-muted">carlos-gmail.com</small>
+                        </div>
+                    </td>
+                    <td>Laptop Dell XPS 13</td>
+                    <td><strong>$2,500.00</strong></td>
+                    <td>
+                        <span class="badge badge-entrada">$750.00</span>
+                    </td>
+                    <td>12 x $145.83</td>
+                    <td><span class="badge badge-pagado">Activa</span></td>
+                    <td>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar" style="width: 33.3%"></div>
+                        </div>
+                        <small class="text-muted">4/12 cuotas</small>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-success me-1">
+                            <i class="bi bi-cash"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#VT-2024-003</strong></td>
+                    <td>
+                        <div>
+                            <strong>Ana Martínez</strong>
+                            <br><small class="text-muted">ana-gmail.com</small>
+                        </div>
+                    </td>
+                    <td>Tablet iPad Air</td>
+                    <td><strong>$800.00</strong></td>
+                    <td>
+                        <span class="badge badge-entrada">$300.00</span>
+                    </td>
+                    <td>6 x $83.33</td>
+                    <td><span class="badge badge-pendiente">Vencida</span></td>
+                    <td>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-danger" style="width: 50%"></div>
+                        </div>
+                        <small class="text-danger">3/6 cuotas</small>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger me-1">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+ <!-- Modal Nueva Venta  añadir el css-->
+<div class="modal fade" id="nuevaVentaModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-plus-circle me-2"></i>
+                    Nueva Venta con Cuotas
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Cliente</label>
+                            <select class="form-select">
+                                <option>Seleccionar cliente...</option>
+                                <option>María González</option>
+                                <option>Carlos Rodríguez</option>
+                                <option>Ana Martínez</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Producto</label>
+                            <select class="form-select">
+                                <option>Seleccionar producto...</option>
+                                <option>Smartphone Galaxy S24</option>
+                                <option>Laptop Dell XPS 13</option>
+                                <option>Tablet iPad Air</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Precio Total</label>
+                            <input type="number" class="form-control" placeholder="0.00">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Entrada (Inicial)</label>
+                            <input type="number" class="form-control" placeholder="0.00">
+                            <small class="text-warning">La entrada siempre es mayor que las cuotas</small>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Número de Cuotas</label>
+                            <select class="form-select">
+                                <option>3 cuotas</option>
+                                <option>6 cuotas</option>
+                                <option>9 cuotas</option>
+                                <option>12 cuotas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Observaciones</label>
+                        <textarea class="form-control" rows="3" placeholder="Notas adicionales..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">
+                    <i class="bi bi-check-lg me-2"></i>
+                    Registrar Venta
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Detalle Venta añadir el css -->
+<div class="modal fade" id="detalleVentaModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-receipt me-2"></i>
+                    Detalle de Venta #VT-2024-001
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="mb-0">Cronograma de Pagos</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="cuotas-timeline">
+                                    <div class="cuota-item entrada">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="mb-1">Entrada Inicial</h6>
+                                                <small class="text-muted">15/01/2024</small>
+                                            </div>
+                                            <div class="text-end">
+                                                <h5 class="mb-0 text-warning">$400.00</h5>
+                                                <span class="badge badge-pagado">Pagado</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cuota-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="mb-1">Cuota 1 de 8</h6>
+                                                <small class="text-muted">15/02/2024</small>
+                                            </div>
+                                            <div class="text-end">
+                                                <h5 class="mb-0">$100.00</h5>
+                                                <span class="badge badge-pagado">Pagado</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cuota-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="mb-1">Cuota 2 de 8</h6>
+                                                <small class="text-muted">15/03/2024</small>
+                                            </div>
+                                            <div class="text-end">
+                                                <h5 class="mb-0">$100.00</h5>
+                                                <span class="badge badge-pagado">Pagado</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cuota-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="mb-1">Cuota 3 de 8</h6>
+                                                <small class="text-muted">15/04/2024</small>
+                                            </div>
+                                            <div class="text-end">
+                                                <h5 class="mb-0">$100.00</h5>
+                                                <span class="badge badge-pendiente">Pendiente</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0">Resumen de Venta</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <small class="text-muted">Cliente</small>
+                                    <h6>María González</h6>
+                                </div>
+                                <div class="mb-3">
+                                    <small class="text-muted">Producto</small>
+                                    <h6>Smartphone Galaxy S24</h6>
+                                </div>
+                                <div class="mb-3">
+                                    <small class="text-muted">Total</small>
+                                    <h5 class="text-primary">$1,200.00</h5>
+                                </div>
+                                <div class="mb-3">
+                                    <small class="text-muted">Pagado</small>
+                                    <h6 class="text-success">$700.00</h6>
+                                </div>
+                                <div class="mb-3">
+                                    <small class="text-muted">Pendiente</small>
+                                    <h6 class="text-warning">$500.00</h6>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar" style="width: 58.3%"></div>
+                                </div>
+                                <small class="text-muted">58.3% completado</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success">
+                    <i class="bi bi-cash me-2"></i>
+                    Registrar Pago
+                </button>
+                <button type="button" class="btn btn-primary">
+                    <i class="bi bi-printer me-2"></i>
+                    Imprimir
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

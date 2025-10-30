@@ -1,0 +1,210 @@
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+}
+
+.movements-section {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.section-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filters {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: var(--accent-blue);
+    color: var(--text-primary);
+    border-color: var(--accent-blue);
+}
+
+.movements-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.movement-item {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.movement-item:hover {
+    background: var(--glass-bg);
+}
+
+.movement-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.movement-icon.income {
+    background: linear-gradient(135deg, var(--success-green), #34d399);
+}
+
+.movement-icon.expense {
+    background: linear-gradient(135deg, var(--danger-red), #f87171);
+}
+
+.movement-icon.loan {
+    background: linear-gradient(135deg, var(--warning-orange), #fbbf24);
+}
+
+.movement-details {
+    flex: 1;
+}
+
+.movement-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.movement-description {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.movement-amount {
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.movement-amount.positive {
+    color: var(--success-green);
+}
+
+.movement-amount.negative {
+    color: var(--danger-red);
+}
+
+.movement-amount.neutral {
+    color: var(--warning-orange);
+}
+
+.quick-actions {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    height: fit-content;
+}
+
+.action-btn {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn.primary {
+    background: linear-gradient(135deg, var(--accent-blue), var(--light-blue));
+    border-color: var(--accent-blue);
+}
+
+.action-btn.success {
+    background: linear-gradient(135deg, var(--success-green), #34d399);
+    border-color: var(--success-green);
+}
+
+.action-btn.danger {
+    background: linear-gradient(135deg, var(--danger-red), #f87171);
+    border-color: var(--danger-red);
+}
+
+.action-btn.warning {
+    background: linear-gradient(135deg, var(--warning-orange), #fbbf24);
+    border-color: var(--warning-orange);
+}
+
+.balance-summary {
+    background: rgba(61, 61, 61, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.balance-title {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+    }
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+    background: var(--secondary-dark);
+    border-radius: 3px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+    background: var(--accent-blue);
+    border-radius: 3px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue-light);
+}

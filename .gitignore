@@ -1,0 +1,53 @@
+# =========================
+# === GENERALES ===========
+# =========================
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+.env
+.idea/
+.vscode/
+*.iml
+
+# =========================
+# === ANGULAR FRONTEND ====
+# =========================
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/package-lock.json
+
+# Archivos de compilación temporales
+frontend/.cache/
+frontend/.parcel-cache/
+frontend/.eslintcache
+
+# =========================
+# === SPRING BOOT BACKEND ==
+# =========================
+backend/target/
+backend/build/
+backend/.mvn/
+backend/.gradle/
+backend/logs/
+backend/*.log
+
+# Archivos de configuración del IDE
+backend/.classpath
+backend/.project
+backend/.settings/
+backend/.factorypath
+
+# =========================
+# === SISTEMAS ============
+# =========================
+# Linux / macOS / Windows
+*.bak
+*.tmp
+*.orig
+*.class
+*.jar
+*.war
+*.ear

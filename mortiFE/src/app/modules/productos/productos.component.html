@@ -1,0 +1,283 @@
+<!-- Header -->
+<div class="header">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+            <h2 class="mb-1">Gestión de Productos</h2>
+            <p class="text-secondary mb-0">Administra tu inventario de manera eficiente</p>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-light">
+                <i class="bi bi-download"></i> Exportar
+            </button>
+            <button class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Nuevo Producto
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Grid -->
+<div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Total Productos</h6>
+                        <h3 class="card-title mb-0 text-primary">1,247</h3>
+                        <small class="text-success">
+                            <i class="bi bi-arrow-up"></i> +12.5%
+                        </small>
+                    </div>
+                    <div class="text-primary">
+                        <i class="bi bi-box" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Productos Activos</h6>
+                        <h3 class="card-title mb-0 text-warning">892</h3>
+                        <small class="text-light">$28,450 total</small>
+                    </div>
+                    <div class="text-warning">
+                        <i class="bi bi-check-circle" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Stock Bajo</h6>
+                        <h3 class="card-title mb-0 text-success">23</h3>
+                        <small class="text-success">
+                            <i class="bi bi-arrow-up"></i> +8.2%
+                        </small>
+                    </div>
+                    <div class="text-success">
+                        <i class="bi bi-exclamation-triangle" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Valor Inventario</h6>
+                        <h3 class="card-title mb-0 text-info">$89.2K</h3>
+                        <div class="progress mt-2">
+                            <div class="progress-bar" style="width: 94.2%"></div>
+                        </div>
+                    </div>
+                    <div class="text-info">
+                        <i class="bi bi-currency-dollar" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Filters and Search -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="search-container">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" class="form-control search-input" placeholder="Buscar productos...">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="filter-tabs d-flex">
+            <select class="filter-tab flex-fill me-2" name="Categorias" id="">
+                <option value="ele">Electrónicos</option>
+            </select>
+            <button class="filter-tab active flex-fill">Todos</button>
+            <button class="filter-tab flex-fill">Entradas</button>
+            <button class="filter-tab flex-fill">Salidas</button>
+            <button class="filter-tab flex-fill">Hoy</button>
+        </div>
+    </div>
+</div>
+
+<!-- Seccion con la lista de los productos -->
+<div class="table-container mb-4">
+    <div class="table-responsive">
+        <table class="table table-dark table-hover mb-0">
+            <thead>
+                <tr>
+                    <th><i class="bi bi-box me-2"></i>Producto</th>
+                    <th>SKU</th>
+                    <th>Categoría</th>
+                    <th><i class="bi bi-hash me-2"></i>Stock</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th><i class="bi bi-three-dots me-2"></i>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <div>
+                                <div class="fw-semibold">iPhone 15 Pro</div>
+                                <small class="text-secondary">Smartphone Premium</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td><code>IPH15P-001</code></td>
+                    <td>Electrónicos</td>
+                    <td>
+                        <span class="fw-semibold">45</span>
+                        <small class="text-secondary">unidades</small>
+                    </td>
+                    <td class="fw-semibold">$1,199.00</td>
+                    <td><span class="status-badge status-active">Activo</span></td>
+                    <td>
+                        <button class="action-btn" title="Ver">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="action-btn" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="/placeholder.svg?height=40&width=40" alt="Producto" class="product-image">
+                            <div>
+                                <div class="fw-semibold">MacBook Air M2</div>
+                                <small class="text-secondary">Laptop Ultrabook</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td><code>MBA-M2-002</code></td>
+                    <td>Electrónicos</td>
+                    <td>
+                        <span class="fw-semibold text-warning">8</span>
+                        <small class="text-secondary">unidades</small>
+                    </td>
+                    <td class="fw-semibold">$1,299.00</td>
+                    <td><span class="status-badge status-active">Activo</span></td>
+                    <td>
+                        <button class="action-btn" title="Ver">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="action-btn" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="/placeholder.svg?height=40&width=40" alt="Producto" class="product-image">
+                            <div>
+                                <div class="fw-semibold">AirPods Pro 2</div>
+                                <small class="text-secondary">Auriculares Inalámbricos</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td><code>APP2-003</code></td>
+                    <td>Audio</td>
+                    <td>
+                        <span class="fw-semibold">127</span>
+                        <small class="text-secondary">unidades</small>
+                    </td>
+                    <td class="fw-semibold">$249.00</td>
+                    <td><span class="status-badge status-active">Activo</span></td>
+                    <td>
+                        <button class="action-btn" title="Ver">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="action-btn" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="/placeholder.svg?height=40&width=40" alt="Producto" class="product-image">
+                            <div>
+                                <div class="fw-semibold">Apple Watch Series 9</div>
+                                <small class="text-secondary">Smartwatch</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td><code>AWS9-004</code></td>
+                    <td>Wearables</td>
+                    <td>
+                        <span class="fw-semibold text-danger">0</span>
+                        <small class="text-secondary">unidades</small>
+                    </td>
+                    <td class="fw-semibold">$399.00</td>
+                    <td><span class="status-badge status-inactive">Sin Stock</span></td>
+                    <td>
+                        <button class="action-btn" title="Ver">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="action-btn" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="/placeholder.svg?height=40&width=40" alt="Producto" class="product-image">
+                            <div>
+                                <div class="fw-semibold">iPad Pro 12.9"</div>
+                                <small class="text-secondary">Tablet Profesional</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td><code>IPP129-005</code></td>
+                    <td>Electrónicos</td>
+                    <td>
+                        <span class="fw-semibold">32</span>
+                        <small class="text-secondary">unidades</small>
+                    </td>
+                    <td class="fw-semibold">$1,099.00</td>
+                    <td><span class="status-badge status-pending">Pendiente</span></td>
+                    <td>
+                        <button class="action-btn" title="Ver">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="action-btn" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

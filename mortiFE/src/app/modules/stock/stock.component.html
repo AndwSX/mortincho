@@ -1,0 +1,320 @@
+<!-- Header -->
+<div class="header">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+            <h2 class="mb-1">Control de Stock</h2>
+            <p class="text-secondary mb-0">Gestiona entradas y salidas de inventario</p>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Nuevo Movimiento
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Grid -->
+<div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Entradas Hoy</h6>
+                        <h3 class="card-title mb-0 text-primary">24</h3>
+                        <small class="text-success">
+                            <i class="bi bi-arrow-up"></i> +12.5%
+                        </small>
+                    </div>
+                    <div class="text-primary">
+                        <i class="bi bi-arrow-down-circle" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Salidas Hoy</h6>
+                        <h3 class="card-title mb-0 text-warning">18</h3>
+                        <small class="text-light">23 total</small>
+                    </div>
+                    <div class="text-warning">
+                        <i class="bi bi-arrow-up-circle" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Stock Total</h6>
+                        <h3 class="card-title mb-0 text-success">232</h3>
+                        <small class="text-success">
+                            <i class="bi bi-arrow-up"></i> +8.2%
+                        </small>
+                    </div>
+                    <div class="text-success">
+                        <i class="bi bi-boxes" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Valor Total</h6>
+                        <h3 class="card-title mb-0 text-info">$128.2K</h3>
+                        <div class="progress mt-2">
+                            <div class="progress-bar" style="width: 94.2%"></div>
+                        </div>
+                    </div>
+                    <div class="text-info">
+                        <i class="bi bi-currency-dollar" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filters and Search -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="search-container">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" class="form-control search-input" placeholder="Buscar movimientos...">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="filter-tabs d-flex">
+            <button class="filter-tab active flex-fill">Todos</button>
+            <button class="filter-tab flex-fill">Entradas</button>
+            <button class="filter-tab flex-fill">Salidas</button>
+            <button class="filter-tab flex-fill">Hoy</button>
+        </div>
+    </div>
+</div>
+
+<!-- Contenido de la lista -->
+<div class="table-container mb-4">
+    <div class="table-responsive">
+        <table class="table table-dark table-hover mb-0">
+            <thead>
+                <tr>
+                    <th><i class="bi bi-calendar3 me-2"></i>Fecha</th>
+                    <th><i class="bi bi-box me-2"></i>Producto</th>
+                    <th><i class="bi bi-arrow-left-right me-2"></i>Tipo</th>
+                    <th><i class="bi bi-hash me-2"></i>Cantidad</th>
+                    <th><i class="bi bi-person me-2"></i>Usuario</th>
+                    <th><i class="bi bi-chat-text me-2"></i>Motivo</th>
+                    <th><i class="bi bi-three-dots me-2"></i>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="d-flex flex-column">
+                            <span>22/09/2025</span>
+                            <small class="text-muted">14:30</small>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <div>Laptop Dell XPS 13</div>
+                                <small class="text-muted">SKU: LPT-001</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="badge-entrada">Entrada</span></td>
+                    <td><strong>+15</strong></td>
+                    <td>
+                        Juan Pérez
+                    </td>
+                    <td>Compra a proveedor</td>
+                    <td>
+                        <button class="action-btn" title="Ver">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="action-btn" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="d-flex flex-column">
+                            <span>22/09/2025</span>
+                            <small class="text-muted">13:15</small>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-success rounded-circle p-2 me-3">
+                                <i class="bi bi-phone text-white"></i>
+                            </div>
+                            <div>
+                                <div>iPhone 15 Pro</div>
+                                <small class="text-muted">SKU: IPH-015</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="badge-salida">Salida</span></td>
+                    <td><strong>-3</strong></td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-secondary rounded-circle p-1 me-2">
+                                <i class="bi bi-person-fill text-white"></i>
+                            </div>
+                            María García
+                        </div>
+                    </td>
+                    <td>Venta cliente</td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="d-flex flex-column">
+                            <span>22/09/2025</span>
+                            <small class="text-muted">11:45</small>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-warning rounded-circle p-2 me-3">
+                                <i class="bi bi-headphones text-white"></i>
+                            </div>
+                            <div>
+                                <div>AirPods Pro 2</div>
+                                <small class="text-muted">SKU: APD-002</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="badge-entrada">Entrada</span></td>
+                    <td><strong>+25</strong></td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-secondary rounded-circle p-1 me-2">
+                                <i class="bi bi-person-fill text-white"></i>
+                            </div>
+                            Carlos López
+                        </div>
+                    </td>
+                    <td>Reposición stock</td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="d-flex flex-column">
+                            <span>21/09/2025</span>
+                            <small class="text-muted">16:20</small>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-info rounded-circle p-2 me-3">
+                                <i class="bi bi-tablet text-white"></i>
+                            </div>
+                            <div>
+                                <div>iPad Air M2</div>
+                                <small class="text-muted">SKU: IPD-M2A</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="badge-salida">Salida</span></td>
+                    <td><strong>-7</strong></td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-secondary rounded-circle p-1 me-2">
+                                <i class="bi bi-person-fill text-white"></i>
+                            </div>
+                            Ana Martín
+                        </div>
+                    </td>
+                    <td>Transferencia sucursal</td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="d-flex flex-column">
+                            <span>21/09/2025</span>
+                            <small class="text-muted">14:10</small>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-danger rounded-circle p-2 me-3">
+                                <i class="bi bi-smartwatch text-white"></i>
+                            </div>
+                            <div>
+                                <div>Apple Watch Series 9</div>
+                                <small class="text-muted">SKU: AW-S9</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="badge-entrada">Entrada</span></td>
+                    <td><strong>+12</strong></td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-secondary rounded-circle p-1 me-2">
+                                <i class="bi bi-person-fill text-white"></i>
+                            </div>
+                            Luis Rodríguez
+                        </div>
+                    </td>
+                    <td>Devolución cliente</td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

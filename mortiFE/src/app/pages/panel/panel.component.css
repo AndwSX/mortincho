@@ -1,0 +1,23 @@
+.sidebar {
+    background: linear-gradient(180deg, var(--card-bg) 0%, #151515 100%);
+    border-right: 1px solid var(--border-color);
+    min-height: 100vh;
+    width: 280px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.main-content {
+    margin-left: 280px;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a2e 100%);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+}
+
+.content-area {
+    padding: 2rem;
+}

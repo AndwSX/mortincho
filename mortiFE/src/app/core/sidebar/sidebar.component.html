@@ -1,0 +1,30 @@
+<div class="sidebar-header" routerLink="/app/dashboard">
+    <h1 class="sidebar-title">
+        <i class="bi bi-graph-up-arrow me-2"></i>
+        Mortincho
+    </h1>
+</div>
+
+<nav class="nav-sections">
+<!-- Inventario -->
+<div class="nav-section">
+    <div class="nav-section-title">Inventario</div>
+    <a routerLink="/app/productos" routerLinkActive="active" class="nav-link"><i class="bi bi-box-seam"></i> Productos</a>
+    <a routerLink="/app/stock" routerLinkActive="active" class="nav-link"><i class="bi bi-arrow-left-right"></i> Control Stock</a>
+</div>
+
+<!-- Ventas -->
+<div class="nav-section">
+    <div class="nav-section-title">Ventas</div>
+    <a routerLink="/app/ventas" routerLinkActive="active" class="nav-link"><i class="bi bi-receipt"></i> Registro de Ventas</a>
+    <a href="#" class="nav-link"><i class="bi bi-credit-card"></i> Control de pagos</a>
+    <a href="#" class="nav-link"><i class="bi bi-exclamation-triangle"></i> Alertas por vencimiento</a>
+</div>
+
+<!-- Finanzas -->
+<div class="nav-section">
+    <div class="nav-section-title">Finanzas</div>
+    <a routerLink="/app/movimientos" routerLinkActive="active" class="nav-link"><i class="bi bi-currency-dollar"></i> Movimientos de saldo</a>
+    <a routerLink="/app/reportes" routerLinkActive="active" class="nav-link"><i class="bi bi-graph-up"></i> Reportes</a>
+</div>
+</nav>

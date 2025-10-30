@@ -1,0 +1,184 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-blue: #2563eb;
+    --secondary-blue: #106ee9;
+    --dark-blue: #1e40af;
+    --light-blue: #3b82f6;
+    --dark-bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --border-color: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --border-gray: #2a2a2a;
+    
+    --accent-blue: #60a5fa;
+    --success-green: #10b981;
+    --danger-red: #ef4444;
+    --warning-orange: #f59e0b;
+}
+/* Header de cada modulo*/
+.header {
+    background: var(--card-bg);
+    border: 1px solid var(--border-gray);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+/* Botones  de Acciones */
+.action-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background: var(--medium-gray);
+    color: var(--primary-blue);
+}
+
+/* Botones principales para add */
+.btn-primary {
+    background: var(--primary-blue);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: var(--dark-blue);
+    transform: translateY(-1px);
+}
+
+/* Cards con stats  */
+.stats-card {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(26, 115, 232, 0.1));
+    border: 1px solid rgba(0, 102, 255, 0.2);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.stats-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--light-blue));
+}
+
+.stats-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-blue);
+    box-shadow: 0 8px 25px rgba(0, 112, 243, 0.15);
+}
+
+
+/* barra de busqueda */
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-primary);
+    padding: 12px 16px 12px 48px;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    background: var(--card-bg);
+    border-color: var(--primary-blue);
+    color: var(--text-primary);
+    box-shadow: 0 0 0 0.2rem rgba(0, 102, 255, 0.25);
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+
+/* Botones al lado de la busqueda */
+.filter-tabs {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.filter-tab {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.filter-tab.active {
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    color: white;
+}
+
+/* Estilos de las tablas */
+.table-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+}
+
+.table-dark {
+    --bs-table-bg: transparent;
+    --bs-table-border-color: var(--border-color);
+}
+
+.table-dark th {
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    border: none;
+    font-weight: 600;
+    padding: 16px;
+}
+
+.table-dark td {
+    padding: 16px;
+    border-color: var(--border-color);
+    vertical-align: middle;
+}
+
+/* Badges con estados */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-active {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.status-inactive {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.status-pending {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+}

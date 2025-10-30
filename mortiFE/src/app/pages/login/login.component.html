@@ -1,0 +1,50 @@
+<body>
+    <div class="login-container">
+        <div class="glass-card">
+            <h1 class="login-title">
+                <i class="bi bi-shield-lock"></i> Login
+            </h1>
+            <p class="login-subtitle">Accede a tu cuenta</p>
+            
+            <form>
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com" required>
+                    <label for="email"><i class="bi bi-envelope me-2"></i>Correo electrónico</label>
+                </div>
+                
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+                    <label for="password"><i class="bi bi-key me-2"></i>Contraseña</label>
+                </div>
+                
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="remember">
+                    <label class="form-check-label" for="remember">
+                        Recordarme
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-login" (click)="onLogin()">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+                </button>
+            </form>
+            
+            <div class="forgot-password">
+                <a href="#"><i class="bi bi-question-circle me-1"></i>¿Olvidaste tu contraseña?</a>
+            </div>
+            
+            <div class="social-login">
+                <div class="social-divider">O continúa con</div>
+                <button class="social-btn">
+                    <i class="bi bi-google"></i>
+                </button>
+                <button class="social-btn">
+                    <i class="bi bi-facebook"></i>
+                </button>
+                <button class="social-btn">
+                    <i class="bi bi-twitter"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>

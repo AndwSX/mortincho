@@ -1,0 +1,250 @@
+<!-- Header -->
+<div class="header">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+            <h2 class="mb-1">Gestión de Movimientos</h2>
+            <p class="text-secondary mb-0">Administra tus movimientos de manera eficiente</p>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Nuevo Saldo <!-- Ni idea que poner aca -->
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Grid -->
+<div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Ingresos del Mes</h6>
+                        <h3 class="card-title mb-0 text-primary">$45,280</h3>
+                        <small class="text-success">
+                            <i class="bi bi-arrow-up"></i> +12.5%
+                        </small>
+                    </div>
+                    <div class="text-primary">
+                        <i class="bi bi-arrow-up-circle" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Gastos del Mes</h6>
+                        <h3 class="card-title mb-0 text-warning">$23,150</h3>
+                        <small class="text-light">-8.2%</small>
+                    </div>
+                    <div class="text-warning">
+                        <i class="bi bi-arrow-down-circle" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Préstamos Pendientes</h6>
+                        <h3 class="card-title mb-0 text-success">$12,500</h3>
+                        <small class="text-success">
+                            <i class="bi bi-arrow-up"></i> 3 activos
+                        </small>
+                    </div>
+                    <div class="text-success">
+                        <i class="bi bi-credit-card" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stats-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h6 class="card-subtitle mb-2">Capital Disponible</h6>
+                        <h3 class="card-title mb-0 text-info">$34,630</h3>
+                        <small class="text-success">
+                            <span class="badge bg-primary">Disponible</span>
+                        </small>
+                    </div>
+                    <div class="text-info">
+                        <i class="bi bi-piggy-bank" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Content Grid -->
+<div class="content-grid">
+    <!-- Movements Section -->
+    <div class="movements-section">
+        <div class="section-header">
+            <h3 class="fs-5">Historial de Movimientos</h3>
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-light">
+                    <i class="bi bi-funnel"></i>
+                    Filtrar
+                </button>
+                <button class="btn btn-sm btn-outline-light">
+                    <i class="bi bi-search"></i>
+                    Buscar
+                </button>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active">Todos</button>
+            <button class="filter-btn">Ingresos</button>
+            <button class="filter-btn">Gastos</button>
+            <button class="filter-btn">Préstamos</button>
+            <button class="filter-btn">Deudas</button>
+            <button class="filter-btn">Capital</button>
+        </div>
+
+        <div class="movements-list scrollbar-custom">
+            <div class="movement-item">
+                <div class="movement-icon income">
+                    <i class="bi bi-arrow-up"></i>
+                </div>
+                <div class="movement-details">
+                    <div class="movement-title">Venta de Productos</div>
+                    <div class="movement-description">Factura #001234 - Cliente ABC Corp</div>
+                </div>
+                <div class="movement-amount positive">+$2,450</div>
+            </div>
+
+            <div class="movement-item">
+                <div class="movement-icon expense">
+                    <i class="bi bi-arrow-down"></i>
+                </div>
+                <div class="movement-details">
+                    <div class="movement-title">Retiro de Capital</div>
+                    <div class="movement-description">Retiro para gastos operativos</div>
+                </div>
+                <div class="movement-amount negative">-$1,200</div>
+            </div>
+
+            <div class="movement-item">
+                <div class="movement-icon loan">
+                    <i class="bi bi-credit-card"></i>
+                </div>
+                <div class="movement-details">
+                    <div class="movement-title">Préstamo Bancario</div>
+                    <div class="movement-description">Banco Nacional - Cuota 3/12</div>
+                </div>
+                <div class="movement-amount neutral">$5,000</div>
+            </div>
+
+            <div class="movement-item">
+                <div class="movement-icon income">
+                    <i class="bi bi-arrow-up"></i>
+                </div>
+                <div class="movement-details">
+                    <div class="movement-title">Pago de Cliente</div>
+                    <div class="movement-description">Transferencia - Cliente XYZ Ltd</div>
+                </div>
+                <div class="movement-amount positive">+$3,750</div>
+            </div>
+
+            <div class="movement-item">
+                <div class="movement-icon expense">
+                    <i class="bi bi-arrow-down"></i>
+                </div>
+                <div class="movement-details">
+                    <div class="movement-title">Pago a Proveedor</div>
+                    <div class="movement-description">Compra de inventario - Proveedor 123</div>
+                </div>
+                <div class="movement-amount negative">-$1,850</div>
+            </div>
+
+            <div class="movement-item">
+                <div class="movement-icon loan">
+                    <i class="bi bi-credit-card"></i>
+                </div>
+                <div class="movement-details">
+                    <div class="movement-title">Deuda Comercial</div>
+                    <div class="movement-description">Proveedor ABC - Pago pendiente</div>
+                </div>
+                <div class="movement-amount neutral">$2,300</div>
+            </div>
+
+            <div class="movement-item">
+                <div class="movement-icon income">
+                    <i class="bi bi-arrow-up"></i>
+                </div>
+                <div class="movement-details">
+                    <div class="movement-title">Ingreso por Servicios</div>
+                    <div class="movement-description">Consultoría - Proyecto Delta</div>
+                </div>
+                <div class="movement-amount positive">+$4,200</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <h4 class="section-title mb-3">Balance General</h4>
+        
+        <div class="balance-summary">
+            <div class="balance-title">Saldo Total</div>
+            <div class="text-primary fs-3">$34,630</div>
+        </div>
+
+        <h5 class="section-title mb-3">Acciones Rápidas</h5>
+        
+        <button class="action-btn success">
+            <i class="bi bi-plus-circle"></i>
+            Registrar Ingreso
+        </button>
+
+        <button class="action-btn danger">
+            <i class="bi bi-dash-circle"></i>
+            Registrar Gasto
+        </button>
+
+        <button class="action-btn warning">
+            <i class="bi bi-credit-card"></i>
+            Nuevo Préstamo
+        </button>
+
+        <button class="action-btn primary">
+            <i class="bi bi-wallet2"></i>
+            Retiro de Capital
+        </button>
+
+        <div class="mt-4">
+            <h6 class=" mb-3">Resumen Rápido</h6>
+            <div class="d-flex justify-content-between mb-2">
+                <span class="">Ingresos:</span>
+                <span class="text-success fw-bold">$45,280</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span class="">Gastos:</span>
+                <span class="text-danger fw-bold">$23,150</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span class="">Préstamos:</span>
+                <span class="text-warning fw-bold">$12,500</span>
+            </div>
+            <hr style="border-color: var(--border-color);">
+            <div class="d-flex justify-content-between">
+                <span class="fw-bold">Balance:</span>
+                <span class="text-primary fw-bold">$34,630</span>
+            </div>
+        </div>
+    </div>
+</div>
