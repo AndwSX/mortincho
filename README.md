@@ -9,8 +9,8 @@ El objetivo es ofrecer una arquitectura moderna, escalable y mantenible, separan
 
 ```
 mi-proyecto/
-├── frontend/     # Aplicación Angular
-├── backend/      # API REST en Spring Boot
+├── mortiFE/     # Aplicación Angular
+├── mortiBE/      # API REST en Spring Boot
 └── .gitignore
 ```
 
@@ -22,13 +22,13 @@ mi-proyecto/
 - [Angular](https://angular.io/)
 - TypeScript
 - HTML5 / CSS3
-- Bootstrap o Tailwind (según implementación)
+- Bootstrap
 
 ### 🔹 Backend
 - [Spring Boot](https://spring.io/projects/spring-boot)
-- Java 17+ (o la versión usada)
+- Java 21
 - Spring Data JPA
-- MySQL / PostgreSQL
+- PostgreSQL
 - Maven
 
 ---
@@ -42,7 +42,7 @@ Asegúrate de tener instalados:
 - [Angular CLI](https://angular.io/cli)
 - [Java JDK 17+](https://adoptium.net/)
 - [Maven](https://maven.apache.org/)
-- Base de datos (MySQL o PostgreSQL)
+- Base de datos (PostgreSQL)
 - Git
 
 ---
@@ -57,7 +57,7 @@ cd mi-proyecto
 
 ### 🔹 2. Configurar el backend
 ```bash
-cd backend
+cd mortiBE
 # Si usas Maven:
 mvn clean install
 # Ejecutar la API
@@ -73,7 +73,7 @@ http://localhost:8080
 
 ### 🔹 3. Configurar el frontend
 ```bash
-cd ../frontend
+cd ../mortiFE
 npm install
 ng serve
 ```
