@@ -1,0 +1,47 @@
+<div class="login-container">
+    <div class="glass-card">
+        <h1 class="login-title">
+            <i class="bi bi-shield-plus"></i> Registrarse
+        </h1>
+        <p class="login-subtitle">Ingresa tus datos</p>
+        
+        <form>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="user" placeholder="usuario123" required>
+                <label for="user"><i class="bi bi-person me-2"></i>Usuario</label>
+            </div>
+
+            <div class="form-floating">
+                <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com" required>
+                <label for="email"><i class="bi bi-envelope me-2"></i>Correo electrónico</label>
+            </div>
+            
+            <div class="form-floating">
+                <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+                <label for="password"><i class="bi bi-key me-2"></i>Contraseña</label>
+            </div>
+            
+            
+            <button type="submit" class="btn btn-login" (click)="onRegistro()">
+                <i class="bi bi-box-arrow-in-up me-2"></i>Crear Cuenta
+            </button>
+        </form>
+        
+        <div class="account-login">
+            <a href="/auth/login"><i class="bi bi-person-check me-1"></i>¿Ya tienes cuenta?</a>
+        </div>
+        
+        <div class="social-login">
+            <div class="social-divider">O ingresa con</div>
+            <button class="social-btn">
+                <i class="bi bi-google"></i>
+            </button>
+            <button class="social-btn">
+                <i class="bi bi-facebook"></i>
+            </button>
+            <button class="social-btn">
+                <i class="bi bi-twitter"></i>
+            </button>
+        </div>
+    </div>
+</div>
