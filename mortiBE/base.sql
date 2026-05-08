@@ -271,93 +271,45 @@ DROP FUNCTION IF EXISTS actualizar_stock_producto();
 
 
 -- =========================================
--- FUNCIÓN PARA ACTUALIZAR STOCK
+-- FUNCIÓN PARA ACTUALIZAR STOCK (REFACTOREADA)
 -- =========================================
-
 CREATE OR REPLACE FUNCTION actualizar_stock_producto()
 RETURNS TRIGGER AS
 $$
+DECLARE
+    v_stock_actual INT;
 BEGIN
-
-    -- =====================================
-    -- ENTRADA
-    -- =====================================
-
-    IF NEW.tipo_movimiento = 'entrada' THEN
-
+    -- DEBUG: Esto aparecerá en los logs de Postgres al insertar
+    -- RAISE NOTICE 'Procesando movimiento tipo % para producto %', NEW.tipo_movimiento, NEW.id_producto;
+    -- 1. Actualizar el stock en la tabla productos
+    IF NEW.tipo_movimiento IN ('entrada', 'ajuste_entrada') THEN
         UPDATE productos
         SET stock_actual = stock_actual + NEW.cantidad
         WHERE id_producto = NEW.id_producto;
-
-    END IF;
-
-
-    -- =====================================
-    -- SALIDA
-    -- =====================================
-
-    IF NEW.tipo_movimiento = 'salida' THEN
-
+        
+    ELSIF NEW.tipo_movimiento IN ('salida', 'ajuste_salida') THEN
         UPDATE productos
         SET stock_actual = stock_actual - NEW.cantidad
         WHERE id_producto = NEW.id_producto;
-
     END IF;
 
-
-    -- =====================================
-    -- AJUSTE ENTRADA
-    -- =====================================
-
-    IF NEW.tipo_movimiento = 'ajuste_entrada' THEN
-
-        UPDATE productos
-        SET stock_actual = stock_actual + NEW.cantidad
-        WHERE id_producto = NEW.id_producto;
-
+    -- 2. Validar que el producto exista y obtener el nuevo stock
+    SELECT stock_actual INTO v_stock_actual
+    FROM productos
+    WHERE id_producto = NEW.id_producto;
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'El producto con ID % no existe en la tabla productos.', NEW.id_producto;
     END IF;
-
-
-    -- =====================================
-    -- AJUSTE SALIDA
-    -- =====================================
-
-    IF NEW.tipo_movimiento = 'ajuste_salida' THEN
-
-        UPDATE productos
-        SET stock_actual = stock_actual - NEW.cantidad
-        WHERE id_producto = NEW.id_producto;
-
+    
+    -- 3. Validar stock negativo (el CHECK de la tabla productos también saltaría aquí)
+    IF v_stock_actual < 0 THEN
+        RAISE EXCEPTION 'Stock insuficiente para el producto %. Stock resultante: %', NEW.id_producto, v_stock_actual;
     END IF;
-
-
-    -- =====================================
-    -- VALIDAR STOCK NEGATIVO
-    -- =====================================
-
-    IF (
-        SELECT stock_actual
-        FROM productos
-        WHERE id_producto = NEW.id_producto
-    ) < 0 THEN
-
-        RAISE EXCEPTION
-        'Stock insuficiente para el producto %',
-        NEW.id_producto;
-
-    END IF;
-
-
     RETURN NEW;
-
 END;
 $$ LANGUAGE plpgsql;
-
-
--- =========================================
--- TRIGGER
--- =========================================
-
+-- Asegúrate de que el trigger esté correctamente vinculado
+DROP TRIGGER IF EXISTS trigger_actualizar_stock ON inventario_movimientos;
 CREATE TRIGGER trigger_actualizar_stock
 AFTER INSERT
 ON inventario_movimientos
