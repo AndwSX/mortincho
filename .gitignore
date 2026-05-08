@@ -25,20 +25,46 @@ frontend/.parcel-cache/
 frontend/.eslintcache
 
 # =========================
-# === SPRING BOOT BACKEND ==
+# === FASTAPI BACKEND =====
 # =========================
-backend/target/
-backend/build/
-backend/.mvn/
-backend/.gradle/
+
+# Entornos virtuales
+backend/venv/
+backend/.venv/
+backend/env/
+backend/.env/
+
+# Cache de Python
+backend/__pycache__/
+backend/**/*.pyc
+backend/**/*.pyo
+backend/**/*.pyd
+
+# Archivos de compilación Python
+*.py[cod]
+*$py.class
+
+# Cache herramientas
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.ruff_cache/
+
+# Logs
 backend/logs/
 backend/*.log
 
-# Archivos de configuración del IDE
-backend/.classpath
-backend/.project
-backend/.settings/
-backend/.factorypath
+# Build / distribución
+backend/build/
+backend/dist/
+backend/*.egg-info/
+
+# Archivos SQLite
+backend/*.sqlite3
+backend/*.db
+
+# Archivos temporales
+backend/.coverage
+backend/htmlcov/
 
 # =========================
 # === SISTEMAS ============
@@ -47,7 +73,3 @@ backend/.factorypath
 *.bak
 *.tmp
 *.orig
-*.class
-*.jar
-*.war
-*.ear

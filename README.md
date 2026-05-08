@@ -1,16 +1,16 @@
-# 🌐 Proyecto Full Stack: Angular + Spring Boot
+# 🌐 Proyecto Full Stack: Angular + FastAPI
 
-Este repositorio contiene un sistema full stack desarrollado con **Angular** para el frontend y **Spring Boot** para el backend.  
+Este repositorio contiene un sistema full stack desarrollado con **Angular** para el frontend y **FastAPI** para el backend.  
 El objetivo es ofrecer una arquitectura moderna, escalable y mantenible, separando las responsabilidades del cliente y del servidor.
 
 ---
 
 ## 🧩 Estructura del proyecto
 
-```
+```text
 mi-proyecto/
-├── mortiFE/     # Aplicación Angular
-├── mortiBE/      # API REST en Spring Boot
+├── mortiFE/      # Aplicación Angular
+├── mortiBE/      # API REST en FastAPI
 └── .gitignore
 ```
 
@@ -19,17 +19,18 @@ mi-proyecto/
 ## 🚀 Tecnologías utilizadas
 
 ### 🔹 Frontend
-- [Angular](https://angular.io/)
+- Angular
 - TypeScript
 - HTML5 / CSS3
 - Bootstrap
 
 ### 🔹 Backend
-- [Spring Boot](https://spring.io/projects/spring-boot)
-- Java 21
-- Spring Data JPA
+- FastAPI
+- Python 3.12+
+- SQLAlchemy
 - PostgreSQL
-- Maven
+- JWT Authentication
+- Uvicorn
 
 ---
 
@@ -38,40 +39,98 @@ mi-proyecto/
 ### 🔸 Requisitos previos
 
 Asegúrate de tener instalados:
-- [Node.js](https://nodejs.org/) (versión 18+)
-- [Angular CLI](https://angular.io/cli)
-- [Java JDK 17+](https://adoptium.net/)
-- [Maven](https://maven.apache.org/)
-- Base de datos (PostgreSQL)
+
+- Node.js 18+
+- Angular CLI
+- Python 3.12+
+- PostgreSQL
 - Git
 
 ---
 
-## 🧠 Instalación y ejecución
+# 🧠 Instalación y ejecución
 
-### 🔹 1. Clonar el repositorio
+## 🔹 1. Clonar el repositorio
+
 ```bash
 git clone https://github.com/tu-usuario/mi-proyecto.git
 cd mi-proyecto
 ```
 
-### 🔹 2. Configurar el backend
+---
+
+# 🔹 2. Configurar el backend (FastAPI)
+
 ```bash
 cd mortiBE
-# Si usas Maven:
-mvn clean install
-# Ejecutar la API
-mvn spring-boot:run
 ```
 
-El backend quedará disponible en:
+## Crear entorno virtual
+
+### Linux / macOS
+
+```bash
+python -m venv venv
+source venv/bin/activate
 ```
-http://localhost:8080
+
+### Windows
+
+```bash
+python -m venv venv
+venv\Scripts\activate
 ```
 
 ---
 
-### 🔹 3. Configurar el frontend
+## Instalar dependencias
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Configurar variables de entorno
+
+Crear un archivo `.env`
+
+```env
+DB_HOST=db.breulkdwhlcxxmrosbhy.supabase.co
+DB_PORT=5432
+DB_NAME=postgres
+DB_USER=postgres
+DB_PASSWORD=TU_PASSWORD
+
+DATABASE_URL=postgresql://postgres:TU_PASSWORD@db.breulkdwhlcxxmrosbhy.supabase.co:5432/postgres
+```
+
+---
+
+## Ejecutar el backend
+
+```bash
+python run.py
+```
+
+El backend quedará disponible en:
+
+```text
+http://localhost:8000
+```
+
+---
+
+## Documentación automática Swagger
+
+```text
+http://localhost:8000/docs
+```
+
+---
+
+# 🔹 3. Configurar el frontend (Angular)
+
 ```bash
 cd ../mortiFE
 npm install
@@ -79,44 +138,84 @@ ng serve
 ```
 
 El frontend quedará disponible en:
-```
+
+```text
 http://localhost:4200
 ```
 
 ---
 
-## 🔄 Comunicación Frontend ↔ Backend
+# 🔄 Comunicación Frontend ↔ Backend
 
-El frontend Angular se comunica con la API de Spring Boot mediante peticiones HTTP (REST) a los endpoints definidos en el backend.  
-Por defecto, las peticiones se realizan hacia:
-```
-http://localhost:8080/api/
-```
+El frontend Angular se comunica con la API FastAPI mediante peticiones HTTP REST.
 
-Si deseas cambiar esta URL, modifícala en el archivo de entorno:
-```
-frontend/src/environments/environment.ts
+Por defecto:
+
+```text
+http://localhost:8000
 ```
 
----
+La configuración puede modificarse desde:
 
-## 🧰 Scripts útiles
-
-### Frontend
-```bash
-npm run build     # Compila la app para producción
-ng test           # Ejecuta pruebas unitarias
-```
-
-### Backend
-```bash
-mvn test          # Ejecuta pruebas del backend
-mvn package       # Genera el archivo .jar
+```text
+mortiFE/src/environments/environment.ts
 ```
 
 ---
 
-## 🧾 Estructura recomendada de ramas
+# 🔐 Autenticación
+
+El sistema utiliza autenticación JWT.
+
+## Flujo de autenticación
+
+1. Usuario inicia sesión
+2. FastAPI genera un JWT
+3. Angular almacena el token
+4. Angular envía el token en cada petición protegida
+5. FastAPI valida el token y obtiene el usuario autenticado
+
+---
+
+# 📦 Estructura recomendada del backend
+
+```text
+mortiBE/
+│
+├── app/
+│   ├── core/
+│   ├── db/
+│   ├── models/
+│   ├── routes/
+│   ├── schemas/
+│   ├── services/
+│   └── main.py
+│
+├── requirements.txt
+├── .env
+└── run.py
+```
+
+---
+
+# 🧰 Scripts útiles
+
+## Frontend
+
+```bash
+npm run build
+ng test
+```
+
+## Backend
+
+```bash
+python run.py
+```
+
+---
+
+# 🧾 Estructura recomendada de ramas
 
 | Rama | Descripción |
 |------|--------------|
@@ -127,15 +226,12 @@ mvn package       # Genera el archivo .jar
 
 ---
 
-## 👨‍💻 Autor
+# 👨‍💻 Autor
 
-**Tu nombre o equipo**  
-📧 *tu-correo@ejemplo.com*  
-🌐 [Tu perfil de GitHub](https://github.com/tu-usuario)
+**Andres Ortiz**
 
 ---
 
-## 🛡️ Licencia
+# 🛡️ Licencia
 
-Este proyecto se distribuye bajo la licencia **MIT**.  
-Consulta el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto se distribuye bajo la licencia MIT.
