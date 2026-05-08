@@ -1,5 +1,5 @@
 from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jose import jwt, JWTError
 from sqlalchemy.orm import Session
 
@@ -8,24 +8,24 @@ from app.db.connection import get_db
 from app.models.usuario_model import Usuario
 
 
-# Le indica a FastAPI dónde está el endpoint de login para generar el token
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+security = HTTPBearer()
 
 
 def get_current_user(
-    token: str = Depends(oauth2_scheme),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: Session = Depends(get_db)
 ) -> Usuario:
     """
-    Dependency que valida el JWT enviado por Angular en el header
+    Dependency que valida el JWT enviado por Angular en el header:
     Authorization: Bearer <token>
-    y retorna el usuario autenticado.
     """
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Token inválido o expirado",
         headers={"WWW-Authenticate": "Bearer"},
     )
+
+    token = credentials.credentials
 
     try:
         payload = jwt.decode(

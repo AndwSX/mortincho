@@ -11,7 +11,8 @@
 CREATE TYPE tipo_movimiento_inventario AS ENUM (
     'entrada',
     'salida',
-    'ajuste'
+    'ajuste_entrada',
+    'ajuste_salida'
 );
 
 CREATE TYPE estado_venta AS ENUM (
@@ -45,9 +46,9 @@ CREATE TYPE estado_alerta AS ENUM (
 CREATE TABLE usuarios (
     id_usuario SERIAL PRIMARY KEY,
 
-    nombre VARCHAR(100) NOT NULL,
+    usuario VARCHAR(100) UNIQUE NOT NULL,
 
-    correo VARCHAR(150) UNIQUE NOT NULL,
+    correo VARCHAR(150) NOT NULL,
 
     password_hash TEXT NOT NULL,
 
@@ -70,9 +71,8 @@ CREATE TABLE productos (
 
     descripcion TEXT,
 
-    stock_actual INT NOT NULL DEFAULT 0,
-
-    precio_venta NUMERIC(12,2) NOT NULL,
+    stock_actual INT NOT NULL DEFAULT 0
+        CHECK (stock_actual >= 0),
 
     activo BOOLEAN DEFAULT TRUE,
 
@@ -254,3 +254,112 @@ ON movimientos_saldo(id_usuario);
 
 CREATE INDEX idx_alertas_cuota
 ON alertas_vencimiento(id_cuota);
+
+
+
+-- =========================================
+-- FUNCIONES Y TRIGGERS PARA ACTUALIZAR STOCK
+-- =========================================
+-- =========================================
+-- ELIMINAR FUNCIÓN Y TRIGGER SI EXISTEN
+-- =========================================
+
+DROP TRIGGER IF EXISTS trigger_actualizar_stock
+ON inventario_movimientos;
+
+DROP FUNCTION IF EXISTS actualizar_stock_producto();
+
+
+-- =========================================
+-- FUNCIÓN PARA ACTUALIZAR STOCK
+-- =========================================
+
+CREATE OR REPLACE FUNCTION actualizar_stock_producto()
+RETURNS TRIGGER AS
+$$
+BEGIN
+
+    -- =====================================
+    -- ENTRADA
+    -- =====================================
+
+    IF NEW.tipo_movimiento = 'entrada' THEN
+
+        UPDATE productos
+        SET stock_actual = stock_actual + NEW.cantidad
+        WHERE id_producto = NEW.id_producto;
+
+    END IF;
+
+
+    -- =====================================
+    -- SALIDA
+    -- =====================================
+
+    IF NEW.tipo_movimiento = 'salida' THEN
+
+        UPDATE productos
+        SET stock_actual = stock_actual - NEW.cantidad
+        WHERE id_producto = NEW.id_producto;
+
+    END IF;
+
+
+    -- =====================================
+    -- AJUSTE ENTRADA
+    -- =====================================
+
+    IF NEW.tipo_movimiento = 'ajuste_entrada' THEN
+
+        UPDATE productos
+        SET stock_actual = stock_actual + NEW.cantidad
+        WHERE id_producto = NEW.id_producto;
+
+    END IF;
+
+
+    -- =====================================
+    -- AJUSTE SALIDA
+    -- =====================================
+
+    IF NEW.tipo_movimiento = 'ajuste_salida' THEN
+
+        UPDATE productos
+        SET stock_actual = stock_actual - NEW.cantidad
+        WHERE id_producto = NEW.id_producto;
+
+    END IF;
+
+
+    -- =====================================
+    -- VALIDAR STOCK NEGATIVO
+    -- =====================================
+
+    IF (
+        SELECT stock_actual
+        FROM productos
+        WHERE id_producto = NEW.id_producto
+    ) < 0 THEN
+
+        RAISE EXCEPTION
+        'Stock insuficiente para el producto %',
+        NEW.id_producto;
+
+    END IF;
+
+
+    RETURN NEW;
+
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- =========================================
+-- TRIGGER
+-- =========================================
+
+CREATE TRIGGER trigger_actualizar_stock
+AFTER INSERT
+ON inventario_movimientos
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_stock_producto();

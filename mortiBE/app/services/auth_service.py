@@ -5,21 +5,21 @@ from app.core.security import verify_password
 
 def autenticar_usuario(
     db: Session,
-    correo: str,
+    usuario: str,
     password: str
 ):
 
-    usuario = db.query(Usuario).filter(
-        Usuario.correo == correo
+    db_usuario = db.query(Usuario).filter(
+        Usuario.usuario == usuario
     ).first()
 
-    if not usuario:
+    if not db_usuario:
         return None
 
     if not verify_password(
         password,
-        usuario.password_hash
+        db_usuario.password_hash
     ):
         return None
 
-    return usuario
+    return db_usuario
