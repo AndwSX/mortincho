@@ -126,7 +126,7 @@ def registrar_venta(db: Session, datos: VentaCreate, id_usuario: int):
         )
 
 def obtener_ventas_usuario(db: Session, id_usuario: int):
-    return db.query(Venta).options(joinedload(Venta.producto)).filter(Venta.id_usuario == id_usuario).all()
+    return db.query(Venta).options(joinedload(Venta.producto)).filter(Venta.id_usuario == id_usuario).order_by(Venta.fecha_venta.desc()).all()
 
 def obtener_venta_detalle(db: Session, id_venta: int, id_usuario: int):
     venta = db.query(Venta).options(joinedload(Venta.producto)).filter(Venta.id_venta == id_venta, Venta.id_usuario == id_usuario).first()

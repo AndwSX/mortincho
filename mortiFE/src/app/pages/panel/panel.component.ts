@@ -8,6 +8,7 @@ import { SharedDrawerComponent } from '../../shared/components/drawer/drawer.com
 import { ProductoDrawerComponent } from '../../shared/drawers/producto-drawer.component';
 import { MovimientoDrawerComponent } from '../../shared/drawers/movimiento-drawer.component';
 import { VentaDrawerComponent } from '../../shared/drawers/venta-drawer.component';
+import { PagoDrawerComponent } from '../../shared/drawers/pago-drawer.component';
 
 @Component({
   selector: 'app-panel',
@@ -20,7 +21,8 @@ import { VentaDrawerComponent } from '../../shared/drawers/venta-drawer.componen
     SharedDrawerComponent,
     ProductoDrawerComponent,
     MovimientoDrawerComponent,
-    VentaDrawerComponent
+    VentaDrawerComponent,
+    PagoDrawerComponent
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.css'
@@ -54,6 +56,9 @@ export class PanelComponent implements OnInit {
       if (this.drawerMode === 'view') return 'Detalles de la Venta';
       return this.drawerMode === 'create' ? 'Nueva Venta' : 'Editar Venta';
     }
+    if (this.drawerType === 'pago') {
+      return 'Registrar Pago';
+    }
     return 'Formulario';
   }
 
@@ -68,6 +73,9 @@ export class PanelComponent implements OnInit {
       if (this.drawerMode === 'view') return 'Información completa y cronograma de pagos.';
       return this.drawerMode === 'create' ? 'Registra una nueva venta.' : 'Actualiza los datos de la venta.';
     }
+    if (this.drawerType === 'pago') {
+      return 'Abona al saldo pendiente de la venta.';
+    }
     return 'Completa los datos necesarios.';
   }
 
@@ -76,7 +84,13 @@ export class PanelComponent implements OnInit {
   }
 
   handleSaved() {
-    this.uiService.notifyProductSaved();
+    if (this.drawerType === 'producto') {
+      this.uiService.notifyProductSaved();
+    } else if (this.drawerType === 'venta') {
+      this.uiService.notifyVentaSaved();
+    } else if (this.drawerType === 'pago') {
+      this.uiService.notifyPagoSaved();
+    }
     this.closeDrawer();
   }
 }

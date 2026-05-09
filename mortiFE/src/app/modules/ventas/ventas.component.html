@@ -139,6 +139,13 @@
                     </td>
                     <td class="px-6 py-4 text-right">
                         <div class="flex items-center justify-end gap-2">
+                            <button 
+                                *ngIf="venta.estado === 'pendiente' || venta.estado === 'pagando'"
+                                (click)="openPagoDrawer(venta)" 
+                                class="p-2 text-green-500 hover:text-white hover:bg-green-500/10 rounded-lg transition-all" 
+                                title="Abonar Pago">
+                                <i class="bi bi-cash"></i>
+                            </button>
                             <button (click)="verDetalles(venta)" class="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-all" title="Ver Cuotas">
                                 <i class="bi bi-eye"></i>
                             </button>

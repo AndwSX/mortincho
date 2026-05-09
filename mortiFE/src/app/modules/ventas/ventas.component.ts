@@ -38,6 +38,14 @@ export class VentasComponent implements OnInit {
       this.drawerState = state;
     });
 
+    this.uiService.ventaSaved$.subscribe(() => {
+      this.loadVentas();
+    });
+
+    this.uiService.pagoSaved$.subscribe(() => {
+      this.loadVentas();
+    });
+
     this.loadVentas();
   }
 
@@ -150,6 +158,13 @@ export class VentasComponent implements OnInit {
 
   verDetalles(venta: any) {
     this.uiService.openDrawer('venta', 'view', venta);
+  }
+
+  openPagoDrawer(venta: any) {
+    this.uiService.openDrawer('pago', 'create', {
+      id_venta: venta.id_venta,
+      saldo_pendiente: venta.saldo_pendiente
+    });
   }
 
   closeDrawer() {
