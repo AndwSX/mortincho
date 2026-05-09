@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import os
 
 from app.db.connection import engine, Base
 
@@ -12,30 +14,33 @@ from app.routes.movimiento_saldo_route import router as movimiento_saldo_router
 from app.routes.prestamo_route import router as prestamo_router
 from app.routes.deuda_route import router as deuda_router
 
-from fastapi.middleware.cors import CORSMiddleware
-
+# IMPORTANTE:
+# Esto fuerza a SQLAlchemy a registrar el modelo
 from app.models.usuario_model import Usuario
 
-
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Sistema Inventario Mortincho"
 )
 
-import os
+# =========================
+# CONFIGURACIÓN CORS
+# =========================
 
+frontend_url = os.getenv("FRONTEND_URL")
 
-# Obtenemos la URL de vercel (o local) desde la variable de entorno,
-# y permitimos "*" o "http://localhost:4200" como valores por defecto si no está seteada.
-frontend_url = os.environ.get("FRONTEND_URL")
+print("FRONTEND_URL:", frontend_url)
+
 if frontend_url:
-    # Soporta múltiples URLs separadas por coma
-    origins = [url.strip() for url in frontend_url.split(",")]
+    origins = [url.strip().rstrip("/") for url in frontend_url.split(",")]
 else:
-    origins = ["http://localhost:4200", "*"]
+    origins = [
+        "http://localhost:4200",
+        "https://mortincho.vercel.app"
+    ]
 
-# Configuración de CORS
+print("ORIGINS:", origins)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -44,6 +49,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# =========================
+# STARTUP
+# =========================
+
+@app.on_event("startup")
+def startup():
+    try:
+        print("Creando tablas...")
+        Base.metadata.create_all(bind=engine)
+        print("Base de datos conectada correctamente")
+    except Exception as e:
+        print("ERROR DB:", str(e))
+
+# =========================
+# ROUTES
+# =========================
 
 app.include_router(usuario_router)
 app.include_router(auth_router)
@@ -55,6 +76,9 @@ app.include_router(movimiento_saldo_router)
 app.include_router(prestamo_router)
 app.include_router(deuda_router)
 
+# =========================
+# ROOT
+# =========================
 
 @app.get("/")
 def home():
