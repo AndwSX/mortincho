@@ -24,9 +24,7 @@ app = FastAPI(
 )
 
 import os
-from fastapi.middleware.cors import CORSMiddleware
 
-# ... (other imports)
 
 # Obtenemos la URL de vercel (o local) desde la variable de entorno,
 # y permitimos "*" o "http://localhost:4200" como valores por defecto si no está seteada.

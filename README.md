@@ -1,7 +1,143 @@
-# 🌐 Proyecto Full Stack: Angular + FastAPI
+# 🌐 Sistema de Gestión Interna - Proyecto Full Stack
 
-Este repositorio contiene un sistema full stack desarrollado con **Angular** para el frontend y **FastAPI** para el backend.  
-El objetivo es ofrecer una arquitectura moderna, escalable y mantenible, separando las responsabilidades del cliente y del servidor.
+## Descripción general
+
+El proyecto consiste en desarrollar un sistema web para optimizar la gestión interna de la empresa, reemplazando el manejo actual realizado en archivos Excel. El objetivo principal es mejorar la organización de la información, el control de inventario, las ventas y los movimientos financieros, permitiendo un manejo más estructurado y seguro de los datos.
+
+El sistema estará orientado a múltiples usuarios, donde cada usuario administrará de forma independiente:
+
+- Sus productos
+- Su inventario
+- Sus ventas
+- Sus cuotas
+- Sus movimientos de saldo
+- Su historial de operaciones
+
+Cada usuario contará con autenticación mediante correo y contraseña.
+
+---
+
+## Objetivos del sistema
+
+- Implementar autenticación de usuarios mediante login y registro.
+- Permitir que cada usuario gestione su propia información de manera independiente.
+- Gestionar productos y controlar el stock disponible.
+- Registrar entradas y salidas de inventario con historial de movimientos.
+- Registrar ventas de productos.
+- Gestionar ventas con anticipo y cuotas.
+- Generar alertas por vencimiento de cuotas.
+- Llevar control de movimientos de saldo e historial financiero.
+- Mantener auditoría de movimientos e historial del sistema.
+
+---
+
+## Funcionalidades principales
+
+### Gestión de usuarios
+- Registro de usuarios
+- Inicio de sesión
+- Gestión independiente de información por usuario
+
+### Inventario
+- Registro de productos
+- Control de stock
+- Entradas y salidas de inventario
+- Auditoría de movimientos (cada movimiento incluye tipo, cantidad, fecha, motivo y usuario responsable)
+
+### Ventas
+Cada venta está asociada a:
+- Un usuario, producto y comprador (solo nombre)
+- Cantidad vendida, anticipo y saldo pendiente
+- Estado de la venta
+- *Afecta automáticamente el stock del producto.*
+
+### Cuotas
+Cada venta puede manejar múltiples cuotas con:
+- Número de cuota, valor, fecha de vencimiento, estado y fecha de pago.
+
+### Alertas de vencimiento
+- El sistema permite generar alertas automáticas cuando una cuota se encuentre próxima a vencer o vencida.
+
+### Movimientos de saldo
+Se lleva un historial financiero de ingresos y egresos relacionados con:
+- Pagos de cuotas, movimientos manuales y ajustes financieros.
+
+---
+
+## Módulos del sistema
+
+- Autenticación de usuarios
+- Gestión de productos
+- Gestión de inventario
+- Gestión de ventas
+- Gestión de cuotas
+- Alertas de vencimiento
+- Movimientos de saldo
+
+---
+
+## Tecnologías utilizadas
+
+### Backend
+- **Python 3.12+**
+- **FastAPI**
+- **PostgreSQL**
+- **SQLAlchemy**
+- **JWT Authentication**
+- **Uvicorn**
+
+### Frontend
+- **Angular**
+- **TypeScript**
+- **HTML5 / CSS3 / Bootstrap**
+
+---
+
+## Estructura principal de la base de datos
+
+### Entidades principales
+- Usuarios
+- Productos
+- InventarioMovimientos
+- Ventas
+- Cuotas
+- MovimientosSaldo
+- AlertasVencimiento
+
+---
+
+## Reglas principales del sistema
+
+- Cada usuario solo podrá visualizar y gestionar su propia información.
+- Todas las entradas y salidas de inventario deben quedar auditadas.
+- Cada venta afecta automáticamente el stock del producto.
+- Las cuotas deben mantener historial y control de pagos.
+- Los movimientos financieros deben quedar registrados.
+- El sistema debe permitir trazabilidad completa de operaciones.
+
+---
+
+## Estado actual del proyecto
+
+Actualmente se encuentra finalizado:
+- Levantamiento inicial de requerimientos
+- Definición de módulos
+- Diseño conceptual del sistema
+- Diseño del MER
+- Diseño inicial de la base de datos PostgreSQL
+
+Pendiente:
+- Diseño visual del DER
+- Implementación backend con FastAPI
+- Creación de modelos SQLAlchemy
+- Desarrollo frontend en Angular
+- Implementación de autenticación JWT
+- Desarrollo de alertas automáticas
+- Desarrollo de reportes y estadísticas
+
+---
+
+> “No hay gloria en la práctica, ¡pero sin práctica no puede haber gloria!”
 
 ---
 
@@ -16,30 +152,11 @@ mi-proyecto/
 
 ---
 
-## 🚀 Tecnologías utilizadas
-
-### 🔹 Frontend
-- Angular
-- TypeScript
-- HTML5 / CSS3
-- Bootstrap
-
-### 🔹 Backend
-- FastAPI
-- Python 3.12+
-- SQLAlchemy
-- PostgreSQL
-- JWT Authentication
-- Uvicorn
-
----
-
 ## ⚙️ Configuración del entorno
 
-### 🔸 Requisitos previos
+### Requisitos previos
 
 Asegúrate de tener instalados:
-
 - Node.js 18+
 - Angular CLI
 - Python 3.12+
@@ -48,50 +165,42 @@ Asegúrate de tener instalados:
 
 ---
 
-# 🧠 Instalación y ejecución
+## 🚀 Instalación y ejecución
 
-## 🔹 1. Clonar el repositorio
+### 1. Clonar el repositorio
 
 ```bash
 git clone https://github.com/tu-usuario/mi-proyecto.git
 cd mi-proyecto
 ```
 
----
-
-# 🔹 2. Configurar el backend (FastAPI)
+### 2. Configurar el backend (FastAPI)
 
 ```bash
 cd mortiBE
 ```
 
-## Crear entorno virtual
+#### Crear entorno virtual
 
-### Linux / macOS
-
+**Linux / macOS**
 ```bash
 python -m venv venv
 source venv/bin/activate
 ```
 
-### Windows
-
+**Windows**
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
----
-
-## Instalar dependencias
+#### Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## Configurar variables de entorno
+#### Configurar variables de entorno
 
 Crear un archivo `.env`
 
@@ -105,31 +214,18 @@ DB_PASSWORD=TU_PASSWORD
 DATABASE_URL=postgresql://postgres:TU_PASSWORD@db.breulkdwhlcxxmrosbhy.supabase.co:5432/postgres
 ```
 
----
-
-## Ejecutar el backend
+#### Ejecutar el backend
 
 ```bash
 python run.py
 ```
 
-El backend quedará disponible en:
-
-```text
-http://localhost:8000
-```
+El backend quedará disponible en: `http://localhost:8000`  
+Documentación automática Swagger: `http://localhost:8000/docs`
 
 ---
 
-## Documentación automática Swagger
-
-```text
-http://localhost:8000/docs
-```
-
----
-
-# 🔹 3. Configurar el frontend (Angular)
+### 3. Configurar el frontend (Angular)
 
 ```bash
 cd ../mortiFE
@@ -137,47 +233,29 @@ npm install
 ng serve
 ```
 
-El frontend quedará disponible en:
-
-```text
-http://localhost:4200
-```
+El frontend quedará disponible en: `http://localhost:4200`
 
 ---
 
-# 🔄 Comunicación Frontend ↔ Backend
+## 🔄 Comunicación Frontend ↔ Backend
 
 El frontend Angular se comunica con la API FastAPI mediante peticiones HTTP REST.
-
-Por defecto:
-
-```text
-http://localhost:8000
-```
-
-La configuración puede modificarse desde:
-
-```text
-mortiFE/src/environments/environment.ts
-```
+Por defecto a `http://localhost:8000`.
+La configuración puede modificarse desde: `mortiFE/src/environments/environment.ts`
 
 ---
 
-# 🔐 Autenticación
+## 🔐 Autenticación
 
 El sistema utiliza autenticación JWT.
-
-## Flujo de autenticación
-
 1. Usuario inicia sesión
 2. FastAPI genera un JWT
-3. Angular almacena el token
-4. Angular envía el token en cada petición protegida
-5. FastAPI valida el token y obtiene el usuario autenticado
+3. Angular almacena el token y lo envía en cada petición protegida
+4. FastAPI valida el token y obtiene el usuario autenticado
 
 ---
 
-# 📦 Estructura recomendada del backend
+## 📦 Estructura recomendada del backend
 
 ```text
 mortiBE/
@@ -198,24 +276,22 @@ mortiBE/
 
 ---
 
-# 🧰 Scripts útiles
+## 🧰 Scripts útiles
 
-## Frontend
-
+### Frontend
 ```bash
 npm run build
 ng test
 ```
 
-## Backend
-
+### Backend
 ```bash
 python run.py
 ```
 
 ---
 
-# 🧾 Estructura recomendada de ramas
+## 🧾 Estructura recomendada de ramas
 
 | Rama | Descripción |
 |------|--------------|
@@ -226,12 +302,12 @@ python run.py
 
 ---
 
-# 👨‍💻 Autor
+## 👨‍💻 Autor
 
 **Andres Ortiz**
 
 ---
 
-# 🛡️ Licencia
+## 🛡️ Licencia
 
 Este proyecto se distribuye bajo la licencia MIT.
