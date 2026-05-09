@@ -1,12 +1,25 @@
-<div class="sidebar">
-    <!-- Sidebar -->
-    <app-sidebar></app-sidebar>
-</div>
-<div class="main-content">
-    <!-- Navbar -->
-    <app-navbar></app-navbar>
-    <div class="content-area">
-        <!-- Contenido Modulos -->
-        <router-outlet></router-outlet>
+<div class="flex h-screen bg-[#09090b] text-[#fafafa] overflow-hidden font-['Outfit']">
+    <!-- Sidebar Container -->
+    <aside class="w-72 hidden md:block flex-shrink-0 border-r border-white/5 bg-[#09090b]">
+        <app-sidebar></app-sidebar>
+    </aside>
+
+    <!-- Main View -->
+    <div class="flex flex-col flex-1 min-w-0 overflow-hidden relative">
+        <!-- Background Gradient -->
+        <div class="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/10 via-transparent to-transparent pointer-events-none"></div>
+
+        <!-- Navbar -->
+        <header class="h-20 flex-shrink-0 z-20 glass-nav border-b border-white/5">
+            <app-navbar></app-navbar>
+        </header>
+
+        <!-- Content Scroll Area -->
+        <main class="flex-1 overflow-y-auto p-6 md:p-10 relative z-10 custom-scrollbar">
+            <!-- Fade-in container for router outlet -->
+            <div class="max-w-7xl mx-auto animate-fadeIn">
+                <router-outlet></router-outlet>
+            </div>
+        </main>
     </div>
 </div>

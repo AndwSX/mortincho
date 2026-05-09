@@ -12,6 +12,9 @@ import { ReportesComponent } from './modules/reportes/reportes.component';
 import { RegistroComponent } from './auth/registro/registro.component';
 import { AuthComponent } from './auth/auth-layout/auth.component';
 
+// Importación del guardián
+import { authGuard } from './core/guards/auth.guard';
+
 
 export const routes: Routes = [
     { path: 'auth', component: AuthComponent, 
@@ -21,7 +24,10 @@ export const routes: Routes = [
             { path: '', redirectTo: 'login', pathMatch: 'full' }
         ]
      },
-    { path: 'app', component: PanelComponent,
+    { 
+        path: 'app', 
+        component: PanelComponent,
+        canActivate: [authGuard], // Aplicamos el guardián aquí
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'productos', component: ProductosComponent },

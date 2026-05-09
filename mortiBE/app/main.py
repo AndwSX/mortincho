@@ -12,6 +12,7 @@ from app.routes.movimiento_saldo_route import router as movimiento_saldo_router
 from app.routes.prestamo_route import router as prestamo_router
 from app.routes.deuda_route import router as deuda_router
 
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.models.usuario_model import Usuario
 
@@ -20,6 +21,15 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Sistema Inventario Mortincho"
+)
+
+# Configuración de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # En producción, pon aquí la URL de tu Angular
+    allow_credentials=True,
+    allow_methods=["*"],  # Esto permitirá OPTIONS, POST, GET, etc.
+    allow_headers=["*"],
 )
 
 

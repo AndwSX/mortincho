@@ -1,52 +1,87 @@
-<div class="login-container">
-    <div class="glass-card">
-        <h1 class="login-title">
-            <i class="bi bi-shield-lock"></i> Iniciar Sesión
-        </h1>
-        <p class="login-subtitle">Accede a tu cuenta</p>
-        
-        <form>
-            <div class="form-floating">
-                <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com" required>
-                <label for="email"><i class="bi bi-envelope me-2"></i>Correo electrónico</label>
+<div class="min-h-screen flex items-center justify-center p-6 bg-[#09090b] relative overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/20 rounded-full blur-[120px] animate-pulse"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-900/20 rounded-full blur-[120px] animate-pulse" style="animation-delay: 2s;"></div>
+
+    <div class="w-full max-w-md z-10">
+        <!-- Logo/Header -->
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-blue-400 shadow-lg shadow-blue-500/20 mb-4">
+                <i class="bi bi-shield-lock text-3xl text-white"></i>
             </div>
-            
-            <div class="form-floating">
-                <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
-                <label for="password"><i class="bi bi-key me-2"></i>Contraseña</label>
-            </div>
-            
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" id="remember">
-                <label class="form-check-label" for="remember">
-                    Recordarme
-                </label>
-            </div>
-            
-            <button type="submit" class="btn btn-login" (click)="onLogin()">
-                <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
-            </button>
-        </form>
-        
-        <div class="forgot-password">
-            <a href="/auth/registro"><i class="bi bi-person-add me-1"></i>¿No tienes cuenta?</a>
+            <h1 class="text-4xl font-bold tracking-tight text-white mb-2">Bienvenido</h1>
+            <p class="text-gray-400 font-light">Inicia sesión para gestionar tu inventario</p>
         </div>
 
-        <div class="forgot-password">
-            <a href="#"><i class="bi bi-question-circle me-1"></i>¿Olvidaste tu contraseña?</a>
-        </div>
-        
-        <div class="social-login">
-            <div class="social-divider">O continúa con</div>
-            <button class="social-btn">
-                <i class="bi bi-google"></i>
-            </button>
-            <button class="social-btn">
-                <i class="bi bi-facebook"></i>
-            </button>
-            <button class="social-btn">
-                <i class="bi bi-twitter"></i>
-            </button>
+        <!-- Login Card -->
+        <div class="glass p-8 rounded-3xl shadow-2xl">
+            <form (submit)="$event.preventDefault()" class="space-y-6">
+                <!-- User Field -->
+                <div class="space-y-2">
+                    <label for="usuario" class="text-sm font-medium text-gray-300 ml-1">Usuario</label>
+                    <div class="relative group">
+                        <i class="bi bi-person absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors"></i>
+                        <input 
+                            type="text" 
+                            id="usuario" 
+                            name="usuario" 
+                            [(ngModel)]="loginData.usuario" 
+                            class="input-field w-full pl-12" 
+                            placeholder="Tu nombre de usuario" 
+                            required>
+                    </div>
+                </div>
+
+                <!-- Password Field -->
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between ml-1">
+                        <label for="password" class="text-sm font-medium text-gray-300">Contraseña</label>
+                        <a href="#" class="text-xs text-blue-500 hover:text-blue-400 transition-colors">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <div class="relative group">
+                        <i class="bi bi-key absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors"></i>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            [(ngModel)]="loginData.password" 
+                            class="input-field w-full pl-12" 
+                            placeholder="••••••••" 
+                            required>
+                    </div>
+                </div>
+
+                <!-- Remember Me -->
+                <div class="flex items-center">
+                    <input type="checkbox" id="remember" class="w-4 h-4 rounded border-white/10 bg-white/5 text-blue-600 focus:ring-blue-600 focus:ring-offset-dark-bg">
+                    <label for="remember" class="ml-2 text-sm text-gray-400 cursor-pointer">Recordarme en este equipo</label>
+                </div>
+
+                <!-- Error Message -->
+                <div *ngIf="errorMessage" class="bg-red-500/10 border border-red-500/20 text-red-500 text-sm py-3 px-4 rounded-xl animate-shake">
+                    <i class="bi bi-exclamation-circle mr-2"></i>
+                    {{ errorMessage }}
+                </div>
+
+                <!-- Submit Button -->
+                <button 
+                    type="submit" 
+                    (click)="onLogin()"
+                    [disabled]="isLoading"
+                    class="btn-primary w-full py-3 rounded-2xl flex items-center justify-center gap-2 group">
+                    <span *ngIf="isLoading" class="spinner"></span>
+                    <i *ngIf="!isLoading" class="bi bi-arrow-right-short text-xl group-hover:translate-x-1 transition-transform"></i>
+                    <span class="text-lg font-semibold">{{ isLoading ? 'Iniciando...' : 'Entrar al Sistema' }}</span>
+                </button>
+            </form>
+
+            <!-- Footer Links -->
+            <div class="mt-8 pt-8 border-t border-white/5 text-center">
+                <p class="text-gray-400 text-sm">
+                    ¿No tienes una cuenta? 
+                    <a href="/auth/registro" class="text-blue-500 font-semibold hover:text-blue-400 transition-colors ml-1">Regístrate ahora</a>
+                </p>
+            </div>
         </div>
     </div>
 </div>
