@@ -1,1 +1,12 @@
-/* Styles handled by Tailwind */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+:host {
+    display: block;
+    height: 100%;
+}

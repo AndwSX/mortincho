@@ -22,7 +22,7 @@ a {
 /* Custom Utilities */
 @layer components {
     .glass {
-        @apply bg-white/5 backdrop-blur-xl border border-white/5;
+        @apply bg-white/5 backdrop-blur-xl ring-1 ring-white/5;
     }
     
     .btn-primary {

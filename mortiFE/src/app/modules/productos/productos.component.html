@@ -22,162 +22,91 @@
         <i class="bi bi-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
         <input 
             type="text" 
-            class="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-2.5 outline-none focus:border-blue-500/50 transition-all text-sm" 
-            placeholder="Buscar por nombre, SKU o categoría...">
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearchChange()"
+            class="input-field w-full pl-12 pr-4 py-2.5 text-sm" 
+            placeholder="Buscar por nombre o descripción...">
     </div>
     <div class="flex items-center gap-2 w-full lg:w-auto">
-        <select class="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-blue-500/50 flex-1 lg:flex-none">
-            <option>Todas las categorías</option>
-            <option>Electrónicos</option>
-            <option>Audio</option>
-            <option>Wearables</option>
-        </select>
-        <button class="bg-blue-600/10 text-blue-500 p-2.5 rounded-xl border border-blue-500/20 hover:bg-blue-600/20 transition-all">
-            <i class="bi bi-filter text-lg"></i>
-        </button>
+        <div class="relative flex-1 lg:flex-none">
+            <select 
+                [(ngModel)]="soloActivos"
+                (change)="onFilterChange()"
+                class="input-field appearance-none pl-4 pr-10 py-2.5 text-sm w-full lg:w-48 bg-[#18181b] cursor-pointer">
+                <option [ngValue]="false">Todos los productos</option>
+                <option [ngValue]="true">Solo activos</option>
+            </select>
+            <i class="bi bi-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-xs"></i>
+        </div>
     </div>
 </div>
 
 <!-- Table Section -->
-<div class="glass rounded-3xl overflow-hidden shadow-2xl">
+<div class="glass rounded-3xl overflow-hidden shadow-xl shadow-black/20">
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
             <thead>
                 <tr class="bg-white/[0.02] border-b border-white/5">
-                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Producto</th>
-                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">SKU</th>
-                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Categoría</th>
+                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Nombre</th>
+                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Descripción</th>
                     <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider text-center">Stock</th>
-                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Precio</th>
                     <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Estado</th>
                     <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider text-right">Acciones</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-white/5">
-                <!-- Row 1 -->
-                <tr class="hover:bg-white/[0.02] transition-colors group">
+                <tr *ngFor="let producto of filteredProductos" class="hover:bg-white/[0.01] transition-colors group">
                     <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-500">
-                                <i class="bi bi-phone"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-semibold text-white">iPhone 15 Pro</p>
-                                <p class="text-xs text-gray-500">Smartphone Premium</p>
-                            </div>
-                        </div>
+                        <span class="text-sm font-semibold text-white">{{ producto.nombre }}</span>
                     </td>
                     <td class="px-6 py-4">
-                        <span class="text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded">IPH15P-001</span>
+                        <span class="text-sm text-gray-400 font-light">{{ producto.descripcion }}</span>
                     </td>
-                    <td class="px-6 py-4 text-sm text-gray-300">Electrónicos</td>
                     <td class="px-6 py-4 text-center">
-                        <span class="text-sm font-bold text-white">45</span>
-                        <span class="text-[10px] text-gray-500 ml-1">uds</span>
+                        <span [ngClass]="producto.stock_actual === 0 ? 'text-red-500 font-bold' : 'text-white'" class="text-sm">
+                            {{ producto.stock_actual }}
+                        </span>
+                        <span class="text-[10px] text-gray-600 ml-1 uppercase">uds</span>
                     </td>
-                    <td class="px-6 py-4 text-sm font-bold text-blue-400">$1,199.00</td>
                     <td class="px-6 py-4">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/10 text-green-500">
-                            <span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5"></span>
-                            Activo
+                        <span 
+                            [ngClass]="producto.activo ? 'bg-green-500/10 text-green-500' : 'bg-gray-500/10 text-gray-500'"
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                            <span [ngClass]="producto.activo ? 'bg-green-500' : 'bg-gray-500'" class="w-1 h-1 rounded-full mr-1.5"></span>
+                            {{ producto.activo ? 'Activo' : 'Inactivo' }}
                         </span>
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                            <button class="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-all"><i class="bi bi-pencil-square"></i></button>
-                            <button class="p-2 text-gray-500 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"><i class="bi bi-trash"></i></button>
+                        <div class="flex items-center justify-end gap-1">
+                            <button class="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-xl transition-all" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button 
+                                (click)="toggleEstado(producto)"
+                                [ngClass]="producto.activo ? 'text-orange-500 hover:bg-orange-500/10' : 'text-green-500 hover:bg-green-500/10'"
+                                class="p-2 rounded-xl transition-all" 
+                                [title]="producto.activo ? 'Desactivar' : 'Activar'">
+                                <i [ngClass]="producto.activo ? 'bi bi-toggle-on' : 'bi bi-toggle-off'" class="text-xl"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
-                <!-- Row 2 -->
-                <tr class="hover:bg-white/[0.02] transition-colors group">
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-500">
-                                <i class="bi bi-laptop"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-semibold text-white">MacBook Air M2</p>
-                                <p class="text-xs text-gray-500">Laptop Ultrabook</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <span class="text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded">MBA-M2-002</span>
-                    </td>
-                    <td class="px-6 py-4 text-sm text-gray-300">Electrónicos</td>
-                    <td class="px-6 py-4 text-center">
-                        <span class="text-sm font-bold text-orange-500">8</span>
-                        <span class="text-[10px] text-gray-500 ml-1">uds</span>
-                    </td>
-                    <td class="px-6 py-4 text-sm font-bold text-blue-400">$1,299.00</td>
-                    <td class="px-6 py-4">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-500/10 text-orange-500">
-                            <span class="w-1.5 h-1.5 rounded-full bg-orange-500 mr-1.5"></span>
-                            Stock Bajo
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                            <button class="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-all"><i class="bi bi-pencil-square"></i></button>
-                            <button class="p-2 text-gray-500 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"><i class="bi bi-trash"></i></button>
-                        </div>
+                
+                <!-- Empty State -->
+                <tr *ngIf="filteredProductos.length === 0 && !isLoading">
+                    <td colspan="5" class="px-6 py-20 text-center text-gray-500">
+                        <i class="bi bi-box-seam text-4xl mb-4 block opacity-20"></i>
+                        No se encontraron productos.
                     </td>
                 </tr>
-                <!-- Row 3 (Out of Stock) -->
-                <tr class="hover:bg-white/[0.02] transition-colors group">
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500">
-                                <i class="bi bi-watch"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-semibold text-white">Apple Watch S9</p>
-                                <p class="text-xs text-gray-500">Smartwatch</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <span class="text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded">AWS9-004</span>
-                    </td>
-                    <td class="px-6 py-4 text-sm text-gray-300">Wearables</td>
-                    <td class="px-6 py-4 text-center">
-                        <span class="text-sm font-bold text-red-500">0</span>
-                        <span class="text-[10px] text-gray-500 ml-1">uds</span>
-                    </td>
-                    <td class="px-6 py-4 text-sm font-bold text-blue-400">$399.00</td>
-                    <td class="px-6 py-4">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-500/10 text-red-500">
-                            <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1.5"></span>
-                            Sin Stock
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                            <button class="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-all"><i class="bi bi-pencil-square"></i></button>
-                            <button class="p-2 text-gray-500 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"><i class="bi bi-trash"></i></button>
-                        </div>
+
+                <!-- Loading State -->
+                <tr *ngIf="isLoading">
+                    <td colspan="5" class="px-6 py-20 text-center">
+                        <span class="spinner !w-8 !h-8 !border-4 !border-blue-600 !border-r-transparent"></span>
                     </td>
                 </tr>
             </tbody>
         </table>
-    </div>
-
-    <!-- Pagination -->
-    <div class="px-6 py-5 bg-white/[0.01] border-t border-white/5 flex items-center justify-between">
-        <p class="text-xs text-gray-500">Mostrando <span class="text-white font-medium">1 a 10</span> de <span class="text-white font-medium">127</span> productos</p>
-        <div class="flex items-center gap-2">
-            <button class="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-all disabled:opacity-30" disabled>
-                <i class="bi bi-chevron-left"></i>
-            </button>
-            <div class="flex items-center gap-1">
-                <button class="w-8 h-8 rounded-lg bg-blue-600 text-white text-xs font-bold">1</button>
-                <button class="w-8 h-8 rounded-lg hover:bg-white/5 text-gray-400 text-xs transition-all">2</button>
-                <button class="w-8 h-8 rounded-lg hover:bg-white/5 text-gray-400 text-xs transition-all">3</button>
-            </div>
-            <button class="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-all">
-                <i class="bi bi-chevron-right"></i>
-            </button>
-        </div>
     </div>
 </div>

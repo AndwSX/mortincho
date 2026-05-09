@@ -57,7 +57,13 @@ export class AuthService {
    */
   isAuthenticated(): boolean {
     const token = this.getToken();
-    // Aquí podrías añadir lógica para verificar si el token ha expirado
     return !!token;
+  }
+
+  /**
+   * Obtiene el perfil del usuario autenticado.
+   */
+  getProfile(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/usuarios/me`);
   }
 }
