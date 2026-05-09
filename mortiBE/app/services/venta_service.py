@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from sqlalchemy.exc import SQLAlchemyError
 from fastapi import HTTPException, status
 from datetime import datetime, date, timedelta
@@ -126,10 +126,10 @@ def registrar_venta(db: Session, datos: VentaCreate, id_usuario: int):
         )
 
 def obtener_ventas_usuario(db: Session, id_usuario: int):
-    return db.query(Venta).filter(Venta.id_usuario == id_usuario).all()
+    return db.query(Venta).options(joinedload(Venta.producto)).filter(Venta.id_usuario == id_usuario).all()
 
 def obtener_venta_detalle(db: Session, id_venta: int, id_usuario: int):
-    venta = db.query(Venta).filter(Venta.id_venta == id_venta, Venta.id_usuario == id_usuario).first()
+    venta = db.query(Venta).options(joinedload(Venta.producto)).filter(Venta.id_venta == id_venta, Venta.id_usuario == id_usuario).first()
     if venta:
         # Cargar cuotas explícitamente si es necesario, aunque el ORM suele manejarlo
         venta.cuotas = db.query(Cuota).filter(Cuota.id_venta == id_venta).order_by(Cuota.numero_cuota).all()

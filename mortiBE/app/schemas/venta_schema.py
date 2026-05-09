@@ -26,6 +26,7 @@ class CuotaResponse(BaseModel):
 class VentaResponse(BaseModel):
     id_venta: int
     id_producto: int
+    nombre_producto: str
     nombre_cliente: str
     total_venta: Decimal
     anticipo: Decimal

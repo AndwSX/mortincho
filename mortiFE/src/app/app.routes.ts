@@ -11,6 +11,7 @@ import { MovimientosComponent } from './modules/movimientos/movimientos.componen
 import { ReportesComponent } from './modules/reportes/reportes.component';
 import { RegistroComponent } from './auth/registro/registro.component';
 import { AuthComponent } from './auth/auth-layout/auth.component';
+import { PagosComponent } from './modules/pagos/pagos.component';
 
 // Importación del guardián
 import { authGuard } from './core/guards/auth.guard';
@@ -33,6 +34,7 @@ export const routes: Routes = [
             { path: 'productos', component: ProductosComponent },
             { path: 'stock', component: StockComponent },
             { path: 'ventas', component: VentasComponent },
+            { path: 'pagos', component: PagosComponent },
             { path: 'movimientos', component: MovimientosComponent },
             { path: 'reportes', component: ReportesComponent },
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' }

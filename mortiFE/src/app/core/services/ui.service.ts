@@ -6,7 +6,7 @@ export type DrawerType = 'producto' | 'venta' | 'movimiento' | 'none';
 export interface DrawerData {
   open: boolean;
   type: DrawerType;
-  mode: 'create' | 'edit';
+  mode: 'create' | 'edit' | 'view';
   data?: any;
 }
 
@@ -24,7 +24,7 @@ export class UiService {
   private productSaved = new Subject<void>();
   productSaved$ = this.productSaved.asObservable();
 
-  openDrawer(type: DrawerType, mode: 'create' | 'edit', data?: any) {
+  openDrawer(type: DrawerType, mode: 'create' | 'edit' | 'view', data?: any) {
     this.drawerState.next({ open: true, type, mode, data });
   }
 

@@ -66,7 +66,7 @@ import { NotificationService } from '../../core/services/notification.service';
   `
 })
 export class ProductoDrawerComponent {
-  @Input() mode: 'create' | 'edit' = 'create';
+  @Input() mode: 'create' | 'edit' | 'view' = 'create';
   @Input() form: any = { nombre: '', descripcion: '' };
   @Output() saved = new EventEmitter<void>();
   @Output() cancelled = new EventEmitter<void>();

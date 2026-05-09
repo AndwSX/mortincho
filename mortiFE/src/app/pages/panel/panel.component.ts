@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { SharedDrawerComponent } from '../../shared/components/drawer/drawer.component';
 import { ProductoDrawerComponent } from '../../shared/drawers/producto-drawer.component';
 import { MovimientoDrawerComponent } from '../../shared/drawers/movimiento-drawer.component';
+import { VentaDrawerComponent } from '../../shared/drawers/venta-drawer.component';
 
 @Component({
   selector: 'app-panel',
@@ -18,7 +19,8 @@ import { MovimientoDrawerComponent } from '../../shared/drawers/movimiento-drawe
     CommonModule, 
     SharedDrawerComponent,
     ProductoDrawerComponent,
-    MovimientoDrawerComponent
+    MovimientoDrawerComponent,
+    VentaDrawerComponent
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.css'
@@ -26,7 +28,7 @@ import { MovimientoDrawerComponent } from '../../shared/drawers/movimiento-drawe
 export class PanelComponent implements OnInit {
   isDrawerOpen: boolean = false;
   drawerType: DrawerType = 'none';
-  drawerMode: 'create' | 'edit' = 'create';
+  drawerMode: DrawerData['mode'] = 'create';
   
   drawerData: any = null;
 
@@ -48,6 +50,10 @@ export class PanelComponent implements OnInit {
     if (this.drawerType === 'movimiento') {
       return 'Registrar Movimientos';
     }
+    if (this.drawerType === 'venta') {
+      if (this.drawerMode === 'view') return 'Detalles de la Venta';
+      return this.drawerMode === 'create' ? 'Nueva Venta' : 'Editar Venta';
+    }
     return 'Formulario';
   }
 
@@ -57,6 +63,10 @@ export class PanelComponent implements OnInit {
     }
     if (this.drawerType === 'movimiento') {
       return 'Registra entradas, salidas o ajustes masivos.';
+    }
+    if (this.drawerType === 'venta') {
+      if (this.drawerMode === 'view') return 'Información completa y cronograma de pagos.';
+      return this.drawerMode === 'create' ? 'Registra una nueva venta.' : 'Actualiza los datos de la venta.';
     }
     return 'Completa los datos necesarios.';
   }

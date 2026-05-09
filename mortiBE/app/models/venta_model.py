@@ -27,6 +27,11 @@ class Venta(Base):
 
     cuotas = relationship("Cuota", back_populates="venta", cascade="all, delete-orphan", order_by="Cuota.numero_cuota")
     pagos = relationship("Pago", back_populates="venta")
+    producto = relationship("Producto")
+
+    @property
+    def nombre_producto(self) -> str:
+        return self.producto.nombre if self.producto else ""
 
     __table_args__ = (
         CheckConstraint('total_venta > 0', name='check_total_venta_positive'),

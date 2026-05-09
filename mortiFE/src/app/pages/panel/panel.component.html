@@ -47,6 +47,14 @@
             (cancelled)="closeDrawer()">
         </app-movimiento-drawer>
 
+        <app-venta-drawer
+            *ngIf="drawerType === 'venta'"
+            [mode]="drawerMode"
+            [form]="drawerData"
+            (saved)="handleSaved()"
+            (cancelled)="closeDrawer()">
+        </app-venta-drawer>
+
         <!-- (Future drawers for other modules will go here) -->
 
     </app-shared-drawer>
