@@ -38,8 +38,10 @@ def registrar_venta(db: Session, datos: VentaCreate, id_usuario: int):
                 detail=f"Stock insuficiente para el producto {producto.nombre}. Stock actual: {producto.stock_actual}"
             )
 
-        # 2. Calcular valores de la venta
-        saldo_pendiente = datos.total_venta - datos.anticipo
+        # 2. Calcular valores de la venta con redondeo a 2 decimales
+        total_venta = Decimal(str(datos.total_venta)).quantize(Decimal('0.01'))
+        anticipo = Decimal(str(datos.anticipo)).quantize(Decimal('0.01'))
+        saldo_pendiente = (total_venta - anticipo).quantize(Decimal('0.01'))
         
         # Determinar estado inicial
         if saldo_pendiente == 0:
@@ -54,8 +56,8 @@ def registrar_venta(db: Session, datos: VentaCreate, id_usuario: int):
             id_usuario=id_usuario,
             id_producto=datos.id_producto,
             nombre_cliente=datos.nombre_cliente,
-            total_venta=datos.total_venta,
-            anticipo=datos.anticipo,
+            total_venta=total_venta,
+            anticipo=anticipo,
             saldo_pendiente=saldo_pendiente,
             estado=estado_inicial
         )

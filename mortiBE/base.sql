@@ -421,31 +421,15 @@ EXECUTE FUNCTION actualizar_estado_cuota();
 CREATE OR REPLACE FUNCTION actualizar_estado_venta()
 RETURNS TRIGGER AS
 $$
-DECLARE
-    v_saldo NUMERIC(12,2);
 BEGIN
-
-    SELECT saldo_pendiente
-    INTO v_saldo
-    FROM ventas
-    WHERE id_venta = NEW.id_venta;
-
-    IF v_saldo = 0 THEN
-
-        UPDATE ventas
-        SET estado = 'pagado'
-        WHERE id_venta = NEW.id_venta;
-
+    -- Verificamos el saldo_pendiente directamente desde la fila que se está actualizando (NEW)
+    IF NEW.saldo_pendiente = 0 THEN
+        NEW.estado := 'pagado';
     ELSE
-
-        UPDATE ventas
-        SET estado = 'pagando'
-        WHERE id_venta = NEW.id_venta;
-
+        NEW.estado := 'pagando';
     END IF;
 
     RETURN NEW;
-
 END;
 $$ LANGUAGE plpgsql;
 
@@ -455,7 +439,7 @@ $$ LANGUAGE plpgsql;
 -- =========================================
 
 CREATE TRIGGER trigger_estado_venta
-AFTER UPDATE
+BEFORE UPDATE
 ON ventas
 FOR EACH ROW
 EXECUTE FUNCTION actualizar_estado_venta();

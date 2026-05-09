@@ -12,6 +12,7 @@ from app.schemas.pago_schema import PagoCreate
 
 def registrar_pago(db: Session, datos: PagoCreate, id_usuario: int):
     try:
+        valor_pagado = Decimal(str(datos.valor_pagado)).quantize(Decimal('0.01'))
         # 1. Validar venta
         venta = db.query(Venta).filter(
             Venta.id_venta == datos.id_venta,
@@ -30,17 +31,17 @@ def registrar_pago(db: Session, datos: PagoCreate, id_usuario: int):
                 detail="Esta venta ya está totalmente pagada."
             )
 
-        if datos.valor_pagado > venta.saldo_pendiente:
+        if valor_pagado > venta.saldo_pendiente:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"El valor pagado ({datos.valor_pagado}) excede el saldo pendiente ({venta.saldo_pendiente})."
+                detail=f"El valor pagado ({valor_pagado}) excede el saldo pendiente ({venta.saldo_pendiente})."
             )
 
         # 2. Crear el registro principal del Pago
         nuevo_pago = Pago(
             id_usuario=id_usuario,
             id_venta=datos.id_venta,
-            valor_pagado=datos.valor_pagado
+            valor_pagado=valor_pagado
         )
         db.add(nuevo_pago)
         db.flush() # Para obtener id_pago
@@ -51,7 +52,7 @@ def registrar_pago(db: Session, datos: PagoCreate, id_usuario: int):
             Cuota.estado == EstadoCuota.pendiente
         ).order_by(Cuota.numero_cuota.asc()).all()
 
-        monto_a_distribuir = datos.valor_pagado
+        monto_a_distribuir = valor_pagado
         detalles_pago = []
 
         for cuota in cuotas_pendientes:
@@ -77,7 +78,7 @@ def registrar_pago(db: Session, datos: PagoCreate, id_usuario: int):
             monto_a_distribuir -= pago_para_esta_cuota
 
         # 4. Actualizar saldo pendiente de la venta
-        venta.saldo_pendiente -= datos.valor_pagado
+        venta.saldo_pendiente -= valor_pagado
         # El trigger en Postgres actualizará el estado de la venta según el nuevo saldo_pendiente
 
         db.commit()

@@ -19,7 +19,7 @@ class Venta(Base):
     total_venta = Column(Numeric(12, 2), nullable=False)
     anticipo = Column(Numeric(12, 2), nullable=False, default=0)
     saldo_pendiente = Column(Numeric(12, 2), nullable=False)
-    estado = Column(Enum(EstadoVenta), default=EstadoVenta.pendiente)
+    estado = Column(Enum(EstadoVenta, name="estado_venta"), default=EstadoVenta.pendiente)
     fecha_venta = Column(
         DateTime(timezone=True),
         server_default=func.now()

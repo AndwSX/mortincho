@@ -18,7 +18,7 @@ class Cuota(Base):
     valor_restante = Column(Numeric(12, 2), nullable=False)
     fecha_vencimiento = Column(Date, nullable=False)
     fecha_ultimo_pago = Column(DateTime(timezone=True), nullable=True)
-    estado = Column(Enum(EstadoCuota), default=EstadoCuota.pendiente)
+    estado = Column(Enum(EstadoCuota, name="estado_cuota"), default=EstadoCuota.pendiente)
 
     venta = relationship("Venta", back_populates="cuotas")
 
