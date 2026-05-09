@@ -9,9 +9,9 @@ class Usuario(Base):
 
     id_usuario = Column(Integer, primary_key=True, index=True)
 
-    nombre = Column(String(100), nullable=False)
+    usuario = Column(String(100), unique=True, nullable=False)
 
-    correo = Column(String(150), unique=True, nullable=False)
+    correo = Column(String(150), nullable=False)
 
     password_hash = Column(String, nullable=False)
 

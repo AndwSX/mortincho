@@ -1,280 +1,109 @@
-<!-- Header -->
-<div class="header">
-    <div class="d-flex justify-content-between align-items-center flex-wrap">
-        <div>
-            <h2 class="mb-1">Gestión de Productos</h2>
-            <p class="text-secondary mb-0">Administra tu inventario de manera eficiente</p>
-        </div>
-        <div class="d-flex gap-2">
-            <button class="btn btn-outline-light">
-                <i class="bi bi-download"></i> Exportar
-            </button>
-            <button class="btn btn-primary">
-                <i class="bi bi-plus-lg"></i> Nuevo Producto
-            </button>
-        </div>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+    <div>
+        <h1 class="text-3xl font-bold text-white mb-1">Gestión de Productos</h1>
+        <p class="text-gray-500 font-light text-sm">Administra y controla tu inventario en tiempo real.</p>
+    </div>
+    <div class="flex items-center gap-3">
+        <button class="bg-white/5 hover:bg-white/10 text-white border border-white/10 px-4 py-2 rounded-xl transition-all flex items-center gap-2 text-sm">
+            <i class="bi bi-download"></i>
+            Exportar
+        </button>
+        <button (click)="openCreateDrawer()" class="btn-primary flex items-center gap-2 text-sm">
+            <i class="bi bi-plus-lg"></i>
+            Nuevo Producto
+        </button>
     </div>
 </div>
 
-<!-- Stats Grid -->
-<div class="row mb-4">
-    <div class="col-md-3 mb-3">
-        <div class="card stats-card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1">
-                        <h6 class="card-subtitle mb-2">Total Productos</h6>
-                        <h3 class="card-title mb-0 text-primary">1,247</h3>
-                        <small class="text-success">
-                            <i class="bi bi-arrow-up"></i> +12.5%
-                        </small>
-                    </div>
-                    <div class="text-primary">
-                        <i class="bi bi-box" style="font-size: 2rem;"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- Filters and Search Bar -->
+<div class="glass p-4 rounded-2xl mb-8 flex flex-col lg:flex-row gap-4 items-center">
+    <div class="relative flex-1 w-full">
+        <i class="bi bi-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+        <input 
+            type="text" 
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearchChange()"
+            class="input-field w-full pl-12 pr-4 py-2.5 text-sm" 
+            placeholder="Buscar por nombre o descripción...">
     </div>
-    <div class="col-md-3 mb-3">
-        <div class="card stats-card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1">
-                        <h6 class="card-subtitle mb-2">Productos Activos</h6>
-                        <h3 class="card-title mb-0 text-warning">892</h3>
-                        <small class="text-light">$28,450 total</small>
-                    </div>
-                    <div class="text-warning">
-                        <i class="bi bi-check-circle" style="font-size: 2rem;"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 mb-3">
-        <div class="card stats-card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1">
-                        <h6 class="card-subtitle mb-2">Stock Bajo</h6>
-                        <h3 class="card-title mb-0 text-success">23</h3>
-                        <small class="text-success">
-                            <i class="bi bi-arrow-up"></i> +8.2%
-                        </small>
-                    </div>
-                    <div class="text-success">
-                        <i class="bi bi-exclamation-triangle" style="font-size: 2rem;"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 mb-3">
-        <div class="card stats-card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1">
-                        <h6 class="card-subtitle mb-2">Valor Inventario</h6>
-                        <h3 class="card-title mb-0 text-info">$89.2K</h3>
-                        <div class="progress mt-2">
-                            <div class="progress-bar" style="width: 94.2%"></div>
-                        </div>
-                    </div>
-                    <div class="text-info">
-                        <i class="bi bi-currency-dollar" style="font-size: 2rem;"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Filters and Search -->
-<div class="row mb-4">
-    <div class="col-md-6">
-        <div class="search-container">
-            <i class="bi bi-search search-icon"></i>
-            <input type="text" class="form-control search-input" placeholder="Buscar productos...">
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="filter-tabs d-flex">
-            <select class="filter-tab flex-fill me-2" name="Categorias" id="">
-                <option value="ele">Electrónicos</option>
+    <div class="flex items-center gap-2 w-full lg:w-auto">
+        <div class="relative flex-1 lg:flex-none">
+            <select 
+                [(ngModel)]="soloActivos"
+                (change)="onFilterChange()"
+                class="input-field appearance-none pl-4 pr-10 py-2.5 text-sm w-full lg:w-48 bg-[#18181b] cursor-pointer">
+                <option [ngValue]="false">Todos los productos</option>
+                <option [ngValue]="true">Solo activos</option>
             </select>
-            <button class="filter-tab active flex-fill">Todos</button>
-            <button class="filter-tab flex-fill">Entradas</button>
-            <button class="filter-tab flex-fill">Salidas</button>
-            <button class="filter-tab flex-fill">Hoy</button>
+            <i class="bi bi-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-xs"></i>
         </div>
     </div>
 </div>
 
-<!-- Seccion con la lista de los productos -->
-<div class="table-container mb-4">
-    <div class="table-responsive">
-        <table class="table table-dark table-hover mb-0">
+<!-- Table Section -->
+<div class="glass rounded-3xl overflow-hidden shadow-xl shadow-black/20">
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
             <thead>
-                <tr>
-                    <th><i class="bi bi-box me-2"></i>Producto</th>
-                    <th>SKU</th>
-                    <th>Categoría</th>
-                    <th><i class="bi bi-hash me-2"></i>Stock</th>
-                    <th>Precio</th>
-                    <th>Estado</th>
-                    <th><i class="bi bi-three-dots me-2"></i>Acciones</th>
+                <tr class="bg-white/[0.02] border-b border-white/5">
+                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Nombre</th>
+                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Descripción</th>
+                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider text-center">Stock</th>
+                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Estado</th>
+                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider text-right">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center gap-3">
-                            <div>
-                                <div class="fw-semibold">iPhone 15 Pro</div>
-                                <small class="text-secondary">Smartphone Premium</small>
-                            </div>
+            <tbody class="divide-y divide-white/5">
+                <tr *ngFor="let producto of filteredProductos" class="hover:bg-white/[0.01] transition-colors group">
+                    <td class="px-6 py-4">
+                        <span class="text-sm font-semibold text-white">{{ producto.nombre }}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="text-sm text-gray-400 font-light truncate max-w-[200px] block">{{ producto.descripcion }}</span>
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <span [ngClass]="producto.stock_actual === 0 ? 'text-red-500 font-bold' : 'text-white'" class="text-sm">
+                            {{ producto.stock_actual }}
+                        </span>
+                        <span class="text-[10px] text-gray-600 ml-1 uppercase">uds</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span 
+                            [ngClass]="producto.activo ? 'bg-green-500/10 text-green-500' : 'bg-gray-500/10 text-gray-500'"
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                            <span [ngClass]="producto.activo ? 'bg-green-500' : 'bg-gray-500'" class="w-1 h-1 rounded-full mr-1.5"></span>
+                            {{ producto.activo ? 'Activo' : 'Inactivo' }}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <div class="flex items-center justify-end gap-1">
+                            <button (click)="openEditDrawer(producto)" class="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-xl transition-all" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button 
+                                (click)="toggleEstado(producto)"
+                                [ngClass]="producto.activo ? 'text-orange-500 hover:bg-orange-500/10' : 'text-green-500 hover:bg-green-500/10'"
+                                class="p-2 rounded-xl transition-all" 
+                                [title]="producto.activo ? 'Desactivar' : 'Activar'">
+                                <i [ngClass]="producto.activo ? 'bi bi-toggle-on' : 'bi bi-toggle-off'" class="text-xl"></i>
+                            </button>
                         </div>
-                    </td>
-                    <td><code>IPH15P-001</code></td>
-                    <td>Electrónicos</td>
-                    <td>
-                        <span class="fw-semibold">45</span>
-                        <small class="text-secondary">unidades</small>
-                    </td>
-                    <td class="fw-semibold">$1,199.00</td>
-                    <td><span class="status-badge status-active">Activo</span></td>
-                    <td>
-                        <button class="action-btn" title="Ver">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <button class="action-btn" title="Editar">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-                        <button class="action-btn" title="Eliminar">
-                            <i class="bi bi-trash"></i>
-                        </button>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center gap-3">
-                            <img src="/placeholder.svg?height=40&width=40" alt="Producto" class="product-image">
-                            <div>
-                                <div class="fw-semibold">MacBook Air M2</div>
-                                <small class="text-secondary">Laptop Ultrabook</small>
-                            </div>
-                        </div>
-                    </td>
-                    <td><code>MBA-M2-002</code></td>
-                    <td>Electrónicos</td>
-                    <td>
-                        <span class="fw-semibold text-warning">8</span>
-                        <small class="text-secondary">unidades</small>
-                    </td>
-                    <td class="fw-semibold">$1,299.00</td>
-                    <td><span class="status-badge status-active">Activo</span></td>
-                    <td>
-                        <button class="action-btn" title="Ver">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <button class="action-btn" title="Editar">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-                        <button class="action-btn" title="Eliminar">
-                            <i class="bi bi-trash"></i>
-                        </button>
+                
+                <!-- Empty State -->
+                <tr *ngIf="filteredProductos.length === 0 && !isLoading">
+                    <td colspan="5" class="px-6 py-20 text-center text-gray-500">
+                        <i class="bi bi-box-seam text-4xl mb-4 block opacity-20"></i>
+                        No se encontraron productos.
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center gap-3">
-                            <img src="/placeholder.svg?height=40&width=40" alt="Producto" class="product-image">
-                            <div>
-                                <div class="fw-semibold">AirPods Pro 2</div>
-                                <small class="text-secondary">Auriculares Inalámbricos</small>
-                            </div>
-                        </div>
-                    </td>
-                    <td><code>APP2-003</code></td>
-                    <td>Audio</td>
-                    <td>
-                        <span class="fw-semibold">127</span>
-                        <small class="text-secondary">unidades</small>
-                    </td>
-                    <td class="fw-semibold">$249.00</td>
-                    <td><span class="status-badge status-active">Activo</span></td>
-                    <td>
-                        <button class="action-btn" title="Ver">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <button class="action-btn" title="Editar">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-                        <button class="action-btn" title="Eliminar">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center gap-3">
-                            <img src="/placeholder.svg?height=40&width=40" alt="Producto" class="product-image">
-                            <div>
-                                <div class="fw-semibold">Apple Watch Series 9</div>
-                                <small class="text-secondary">Smartwatch</small>
-                            </div>
-                        </div>
-                    </td>
-                    <td><code>AWS9-004</code></td>
-                    <td>Wearables</td>
-                    <td>
-                        <span class="fw-semibold text-danger">0</span>
-                        <small class="text-secondary">unidades</small>
-                    </td>
-                    <td class="fw-semibold">$399.00</td>
-                    <td><span class="status-badge status-inactive">Sin Stock</span></td>
-                    <td>
-                        <button class="action-btn" title="Ver">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <button class="action-btn" title="Editar">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-                        <button class="action-btn" title="Eliminar">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center gap-3">
-                            <img src="/placeholder.svg?height=40&width=40" alt="Producto" class="product-image">
-                            <div>
-                                <div class="fw-semibold">iPad Pro 12.9"</div>
-                                <small class="text-secondary">Tablet Profesional</small>
-                            </div>
-                        </div>
-                    </td>
-                    <td><code>IPP129-005</code></td>
-                    <td>Electrónicos</td>
-                    <td>
-                        <span class="fw-semibold">32</span>
-                        <small class="text-secondary">unidades</small>
-                    </td>
-                    <td class="fw-semibold">$1,099.00</td>
-                    <td><span class="status-badge status-pending">Pendiente</span></td>
-                    <td>
-                        <button class="action-btn" title="Ver">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <button class="action-btn" title="Editar">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-                        <button class="action-btn" title="Eliminar">
-                            <i class="bi bi-trash"></i>
-                        </button>
+
+                <!-- Loading State -->
+                <tr *ngIf="isLoading">
+                    <td colspan="5" class="px-6 py-20 text-center">
+                        <span class="spinner !w-8 !h-8 !border-4 !border-blue-600 !border-r-transparent"></span>
                     </td>
                 </tr>
             </tbody>

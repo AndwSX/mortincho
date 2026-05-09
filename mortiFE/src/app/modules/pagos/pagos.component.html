@@ -1,0 +1,109 @@
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+    <div>
+        <h1 class="text-3xl font-bold text-white mb-1">Control de Pagos</h1>
+        <p class="text-gray-500 font-light text-sm">Gestiona ventas, cobros pendientes y estados de crédito.</p>
+    </div>
+    <div class="flex items-center gap-3">
+        <button class="btn-primary flex items-center gap-2 text-sm shadow-blue-500/20">
+            <i class="bi bi-calendar-plus"></i>
+            Programar Cobro
+        </button>
+    </div>
+</div>
+
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+    <div class="glass p-6 rounded-3xl">
+        <p class="text-gray-500 text-xs uppercase font-bold tracking-wider mb-2">Por Cobrar</p>
+        <h3 class="text-2xl font-bold text-white">$1,250.00</h3>
+        <div class="mt-2 text-[10px] text-blue-500 flex items-center gap-1">
+            <i class="bi bi-info-circle"></i> 12 pagos activos
+        </div>
+    </div>
+    <div class="glass p-6 rounded-3xl">
+        <p class="text-gray-500 text-xs uppercase font-bold tracking-wider mb-2">Vencido</p>
+        <h3 class="text-2xl font-bold text-red-500">$420.00</h3>
+        <div class="mt-2 text-[10px] text-red-500/60 flex items-center gap-1">
+            <i class="bi bi-exclamation-triangle"></i> 3 clientes atrasados
+        </div>
+    </div>
+    <div class="glass p-6 rounded-3xl">
+        <p class="text-gray-500 text-xs uppercase font-bold tracking-wider mb-2">Recaudado Hoy</p>
+        <h3 class="text-2xl font-bold text-green-500">$85.00</h3>
+        <div class="mt-2 text-[10px] text-green-500/60 flex items-center gap-1">
+            <i class="bi bi-check2-circle"></i> 2 pagos recibidos
+        </div>
+    </div>
+    <div class="glass p-6 rounded-3xl border-l-4 border-blue-600">
+        <p class="text-gray-500 text-xs uppercase font-bold tracking-wider mb-2">Eficiencia</p>
+        <h3 class="text-2xl font-bold text-white">92%</h3>
+        <div class="mt-2 w-full bg-white/5 h-1 rounded-full overflow-hidden">
+            <div class="bg-blue-600 h-full w-[92%] shadow-[0_0_8px_rgba(37,99,235,0.5)]"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Table Section -->
+<div class="glass rounded-3xl overflow-hidden">
+    <div class="p-6 border-b border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <h2 class="text-lg font-bold text-white">Cronograma de Pagos</h2>
+        <div class="flex gap-2">
+            <input type="text" placeholder="Buscar cliente..." class="input-field py-2 px-4 text-xs w-64">
+            <select class="input-field py-2 px-4 text-xs bg-[#18181b]">
+                <option>Todos los estados</option>
+                <option>Pendientes</option>
+                <option>Vencidos</option>
+                <option>Pagados</option>
+            </select>
+        </div>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-white/[0.02] text-xs font-bold text-gray-500 uppercase">
+                    <th class="px-6 py-4">Cliente / Producto</th>
+                    <th class="px-6 py-4">Deuda Total</th>
+                    <th class="px-6 py-4">Progreso</th>
+                    <th class="px-6 py-4">Próxima Cuota</th>
+                    <th class="px-6 py-4">Estado</th>
+                    <th class="px-6 py-4">Acción</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-white/5">
+                <tr *ngFor="let p of pagos" class="hover:bg-white/[0.01] transition-colors">
+                    <td class="px-6 py-4">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-semibold text-white">{{ p.cliente }}</span>
+                            <span class="text-[10px] text-gray-500 uppercase">{{ p.producto }}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 font-bold text-white text-sm">
+                        ${{ p.total }}
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex flex-col gap-1 w-24">
+                            <span class="text-[10px] text-gray-400">${{ p.pagado }} de ${{ p.total }}</span>
+                            <div class="w-full bg-white/5 h-1 rounded-full overflow-hidden">
+                                <div class="bg-blue-600 h-full" [style.width.%]="(p.pagado/p.total)*100"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-300">
+                        {{ p.proxima_cuota }}
+                    </td>
+                    <td class="px-6 py-4">
+                        <span [ngClass]="getEstadoClass(p.estado)" class="px-3 py-1 rounded-full text-[10px] font-bold uppercase border">
+                            {{ p.estado }}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <button class="p-2 text-blue-500 hover:bg-blue-500/10 rounded-xl transition-all">
+                            <i class="bi bi-wallet2"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

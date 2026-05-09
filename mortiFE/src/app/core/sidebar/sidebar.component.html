@@ -1,30 +1,106 @@
-<div class="sidebar-header" routerLink="/app/dashboard">
-    <h1 class="sidebar-title">
-        <i class="bi bi-graph-up-arrow me-2"></i>
-        Mortincho
-    </h1>
-</div>
+<div class="flex flex-col h-full py-8 overflow-hidden">
+    <!-- Brand -->
+    <div class="flex items-center gap-4 px-5 mb-10 cursor-pointer group/brand" routerLink="/app/dashboard">
+        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover/brand:scale-110 transition-transform">
+            <i class="bi bi-rocket-takeoff-fill text-white text-xl"></i>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-white group-hover/brand:text-blue-400 transition-all duration-300 opacity-0 group-hover/sidebar:opacity-100 whitespace-nowrap">
+            Mortincho
+        </span>
+    </div>
 
-<nav class="nav-sections">
-<!-- Inventario -->
-<div class="nav-section">
-    <div class="nav-section-title">Inventario</div>
-    <a routerLink="/app/productos" routerLinkActive="active" class="nav-link"><i class="bi bi-box-seam"></i> Productos</a>
-    <a routerLink="/app/stock" routerLinkActive="active" class="nav-link"><i class="bi bi-arrow-left-right"></i> Control Stock</a>
-</div>
+    <!-- Navigation -->
+    <nav class="flex-1 px-3 space-y-8 overflow-y-auto overflow-x-hidden no-scrollbar">
+        <!-- Inicio -->
+        <div class="space-y-2">
+            <h3 class="px-3 text-[10px] font-bold text-gray-600 uppercase tracking-[0.2em] opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                Principal
+            </h3>
+            <a routerLink="/app/dashboard" routerLinkActive="bg-blue-600/10 text-blue-500" class="flex items-center gap-4 px-3 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all group/item">
+                <div class="flex-shrink-0 w-6 flex items-center justify-center">
+                    <i class="bi bi-grid text-lg group-hover/item:scale-110 transition-transform"></i>
+                </div>
+                <span class="font-medium opacity-0 group-hover/sidebar:opacity-100 transition-all duration-300 whitespace-nowrap">Dashboard</span>
+            </a>
+        </div>
 
-<!-- Ventas -->
-<div class="nav-section">
-    <div class="nav-section-title">Ventas</div>
-    <a routerLink="/app/ventas" routerLinkActive="active" class="nav-link"><i class="bi bi-receipt"></i> Registro de Ventas</a>
-    <a href="#" class="nav-link"><i class="bi bi-credit-card"></i> Control de pagos</a>
-    <a href="#" class="nav-link"><i class="bi bi-exclamation-triangle"></i> Alertas por vencimiento</a>
-</div>
+        <!-- Inventario -->
+        <div class="space-y-2">
+            <h3 class="px-3 text-[10px] font-bold text-gray-600 uppercase tracking-[0.2em] opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                Inventario
+            </h3>
+            <div class="space-y-1">
+                <a routerLink="/app/productos" routerLinkActive="bg-blue-600/10 text-blue-500" class="flex items-center gap-4 px-3 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all group/item">
+                    <div class="flex-shrink-0 w-6 flex items-center justify-center">
+                        <i class="bi bi-box-seam text-lg group-hover/item:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="font-medium opacity-0 group-hover/sidebar:opacity-100 transition-all duration-300 whitespace-nowrap">Productos</span>
+                </a>
+                <a routerLink="/app/stock" routerLinkActive="bg-blue-600/10 text-blue-500" class="flex items-center gap-4 px-3 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all group/item">
+                    <div class="flex-shrink-0 w-6 flex items-center justify-center">
+                        <i class="bi bi-stack text-lg group-hover/item:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="font-medium opacity-0 group-hover/sidebar:opacity-100 transition-all duration-300 whitespace-nowrap">Control Stock</span>
+                </a>
+            </div>
+        </div>
 
-<!-- Finanzas -->
-<div class="nav-section">
-    <div class="nav-section-title">Finanzas</div>
-    <a routerLink="/app/movimientos" routerLinkActive="active" class="nav-link"><i class="bi bi-currency-dollar"></i> Movimientos de saldo</a>
-    <a routerLink="/app/reportes" routerLinkActive="active" class="nav-link"><i class="bi bi-graph-up"></i> Reportes</a>
+        <!-- Ventas -->
+        <div class="space-y-2">
+            <h3 class="px-3 text-[10px] font-bold text-gray-600 uppercase tracking-[0.2em] opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                Ventas
+            </h3>
+            <div class="space-y-1">
+                <a routerLink="/app/ventas" routerLinkActive="bg-blue-600/10 text-blue-500" class="flex items-center gap-4 px-3 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all group/item">
+                    <div class="flex-shrink-0 w-6 flex items-center justify-center">
+                        <i class="bi bi-cart3 text-lg group-hover/item:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="font-medium opacity-0 group-hover/sidebar:opacity-100 transition-all duration-300 whitespace-nowrap">Registro Ventas</span>
+                </a>
+                <a routerLink="/app/pagos" routerLinkActive="bg-blue-600/10 text-blue-500" class="flex items-center gap-4 px-3 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all group/item">
+                    <div class="flex-shrink-0 w-6 flex items-center justify-center">
+                        <i class="bi bi-calendar-check text-lg group-hover/item:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="font-medium opacity-0 group-hover/sidebar:opacity-100 transition-all duration-300 whitespace-nowrap">Control Pagos</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Finanzas -->
+        <div class="space-y-2">
+            <h3 class="px-3 text-[10px] font-bold text-gray-600 uppercase tracking-[0.2em] opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                Finanzas
+            </h3>
+            <div class="space-y-1">
+                <a routerLink="/app/movimientos" routerLinkActive="bg-blue-600/10 text-blue-500" class="flex items-center gap-4 px-3 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all group/item">
+                    <div class="flex-shrink-0 w-6 flex items-center justify-center">
+                        <i class="bi bi-currency-exchange text-lg group-hover/item:scale-110 transition-transform"></i>
+                    </div>
+                    <span class="font-medium opacity-0 group-hover/sidebar:opacity-100 transition-all duration-300 whitespace-nowrap">Movimientos</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Logout / User Section -->
+    <div class="mt-auto pt-6 px-3 border-t border-white/5 bg-[#09090b]/80 backdrop-blur-sm">
+        <div class="flex items-center gap-4 px-2 mb-6 group/user">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-tr from-gray-800 to-gray-700 flex items-center justify-center text-white font-bold shadow-lg group-hover/user:scale-105 transition-transform overflow-hidden">
+                <img *ngIf="userProfile" [src]="'https://ui-avatars.com/api/?name=' + userProfile.usuario + '&background=2563eb&color=fff'" class="w-full h-full object-cover">
+                <span *ngIf="!userProfile">U</span>
+            </div>
+            <div class="flex-1 min-w-0 opacity-0 group-hover/sidebar:opacity-100 transition-all duration-300">
+                <p class="text-sm font-semibold text-white truncate">{{ userProfile?.usuario || 'Cargando...' }}</p>
+                <p class="text-[10px] text-gray-500 truncate">{{ userProfile?.correo || '...' }}</p>
+            </div>
+        </div>
+        <button 
+            (click)="logout()"
+            class="w-full flex items-center gap-4 px-3 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-all group/logout overflow-hidden">
+            <div class="flex-shrink-0 w-6 flex items-center justify-center">
+                <i class="bi bi-box-arrow-right text-lg group-hover/logout:-translate-x-1 transition-transform"></i>
+            </div>
+            <span class="font-medium opacity-0 group-hover/sidebar:opacity-100 transition-all duration-300 whitespace-nowrap">Cerrar Sesión</span>
+        </button>
+    </div>
 </div>
-</nav>

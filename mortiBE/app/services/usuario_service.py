@@ -11,14 +11,14 @@ def crear_usuario(
 ):
 
     existe = db.query(Usuario).filter(
-        Usuario.correo == usuario.correo
+        Usuario.usuario == usuario.usuario
     ).first()
 
     if existe:
         return None
 
     nuevo_usuario = Usuario(
-        nombre=usuario.nombre,
+        usuario=usuario.usuario,
         correo=usuario.correo,
         password_hash=hash_password(usuario.password)
     )
