@@ -23,12 +23,26 @@ app = FastAPI(
     title="Sistema Inventario Mortincho"
 )
 
+import os
+from fastapi.middleware.cors import CORSMiddleware
+
+# ... (other imports)
+
+# Obtenemos la URL de vercel (o local) desde la variable de entorno,
+# y permitimos "*" o "http://localhost:4200" como valores por defecto si no está seteada.
+frontend_url = os.environ.get("FRONTEND_URL")
+if frontend_url:
+    # Soporta múltiples URLs separadas por coma
+    origins = [url.strip() for url in frontend_url.split(",")]
+else:
+    origins = ["http://localhost:4200", "*"]
+
 # Configuración de CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # En producción, pon aquí la URL de tu Angular
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],  # Esto permitirá OPTIONS, POST, GET, etc.
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 

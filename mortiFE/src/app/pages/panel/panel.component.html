@@ -62,6 +62,34 @@
             (cancelled)="closeDrawer()">
         </app-pago-drawer>
 
+        <app-movimiento-saldo-drawer
+            *ngIf="drawerType === 'movimiento_saldo'"
+            [form]="drawerData"
+            (saved)="handleSaved()"
+            (cancelled)="closeDrawer()">
+        </app-movimiento-saldo-drawer>
+
+        <app-prestamo-drawer
+            *ngIf="drawerType === 'prestamo'"
+            [form]="drawerData"
+            (saved)="handleSaved()"
+            (cancelled)="closeDrawer()">
+        </app-prestamo-drawer>
+
+        <app-deuda-drawer
+            *ngIf="drawerType === 'deuda'"
+            [form]="drawerData"
+            (saved)="handleSaved()"
+            (cancelled)="closeDrawer()">
+        </app-deuda-drawer>
+
+        <app-pago-entidad-drawer
+            *ngIf="drawerType === 'pago_entidad'"
+            [form]="drawerData"
+            (saved)="handleSaved()"
+            (cancelled)="closeDrawer()">
+        </app-pago-entidad-drawer>
+
         <!-- (Future drawers for other modules will go here) -->
 
     </app-shared-drawer>

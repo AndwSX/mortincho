@@ -9,6 +9,10 @@ import { ProductoDrawerComponent } from '../../shared/drawers/producto-drawer.co
 import { MovimientoDrawerComponent } from '../../shared/drawers/movimiento-drawer.component';
 import { VentaDrawerComponent } from '../../shared/drawers/venta-drawer.component';
 import { PagoDrawerComponent } from '../../shared/drawers/pago-drawer.component';
+import { MovimientoSaldoDrawerComponent } from '../../shared/drawers/movimiento-saldo-drawer.component';
+import { PrestamoDrawerComponent } from '../../shared/drawers/prestamo-drawer.component';
+import { DeudaDrawerComponent } from '../../shared/drawers/deuda-drawer.component';
+import { PagoEntidadDrawerComponent } from '../../shared/drawers/pago-entidad-drawer.component';
 
 @Component({
   selector: 'app-panel',
@@ -22,7 +26,11 @@ import { PagoDrawerComponent } from '../../shared/drawers/pago-drawer.component'
     ProductoDrawerComponent,
     MovimientoDrawerComponent,
     VentaDrawerComponent,
-    PagoDrawerComponent
+    PagoDrawerComponent,
+    MovimientoSaldoDrawerComponent,
+    PrestamoDrawerComponent,
+    DeudaDrawerComponent,
+    PagoEntidadDrawerComponent
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.css'
@@ -59,6 +67,13 @@ export class PanelComponent implements OnInit {
     if (this.drawerType === 'pago') {
       return 'Registrar Pago';
     }
+    if (this.drawerType === 'movimiento_saldo') {
+      return this.drawerData?.tipo === 'ingreso' ? 'Registrar Ingreso' : 'Registrar Gasto';
+    }
+    if (this.drawerType === 'prestamo') return 'Registrar Préstamo';
+    if (this.drawerType === 'deuda') return 'Registrar Deuda';
+    if (this.drawerType === 'pago_entidad') return 'Abonar Pago';
+
     return 'Formulario';
   }
 
@@ -76,6 +91,13 @@ export class PanelComponent implements OnInit {
     if (this.drawerType === 'pago') {
       return 'Abona al saldo pendiente de la venta.';
     }
+    if (this.drawerType === 'movimiento_saldo') {
+      return 'Agrega un nuevo movimiento al balance general.';
+    }
+    if (this.drawerType === 'prestamo') return 'Agrega un nuevo préstamo.';
+    if (this.drawerType === 'deuda') return 'Agrega una nueva deuda.';
+    if (this.drawerType === 'pago_entidad') return 'Abona al saldo pendiente de la entidad.';
+
     return 'Completa los datos necesarios.';
   }
 
@@ -90,6 +112,10 @@ export class PanelComponent implements OnInit {
       this.uiService.notifyVentaSaved();
     } else if (this.drawerType === 'pago') {
       this.uiService.notifyPagoSaved();
+    } else if (this.drawerType === 'movimiento_saldo') {
+      this.uiService.notifyMovimientoSaldoSaved();
+    } else if (['prestamo', 'deuda', 'pago_entidad'].includes(this.drawerType)) {
+      this.uiService.notifyEntidadSaved();
     }
     this.closeDrawer();
   }

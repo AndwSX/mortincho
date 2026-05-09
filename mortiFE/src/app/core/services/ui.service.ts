@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 
-export type DrawerType = 'producto' | 'venta' | 'movimiento' | 'pago' | 'none';
+export type DrawerType = 'producto' | 'venta' | 'movimiento' | 'pago' | 'movimiento_saldo' | 'prestamo' | 'deuda' | 'pago_entidad' | 'none';
 
 export interface DrawerData {
   open: boolean;
@@ -30,6 +30,12 @@ export class UiService {
   private pagoSaved = new Subject<void>();
   pagoSaved$ = this.pagoSaved.asObservable();
 
+  private movimientoSaldoSaved = new Subject<void>();
+  movimientoSaldoSaved$ = this.movimientoSaldoSaved.asObservable();
+
+  private entidadSaved = new Subject<void>();
+  entidadSaved$ = this.entidadSaved.asObservable();
+
   openDrawer(type: DrawerType, mode: 'create' | 'edit' | 'view', data?: any) {
     this.drawerState.next({ open: true, type, mode, data });
   }
@@ -48,5 +54,13 @@ export class UiService {
 
   notifyPagoSaved() {
     this.pagoSaved.next();
+  }
+
+  notifyMovimientoSaldoSaved() {
+    this.movimientoSaldoSaved.next();
+  }
+
+  notifyEntidadSaved() {
+    this.entidadSaved.next();
   }
 }
