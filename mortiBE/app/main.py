@@ -8,6 +8,9 @@ from app.routes.producto_route import router as producto_router
 from app.routes.inventario_route import router as inventario_router
 from app.routes.venta_route import router as venta_router
 from app.routes.pago_route import router as pago_router
+from app.routes.movimiento_saldo_route import router as movimiento_saldo_router
+from app.routes.prestamo_route import router as prestamo_router
+from app.routes.deuda_route import router as deuda_router
 
 
 from app.models.usuario_model import Usuario
@@ -26,6 +29,9 @@ app.include_router(producto_router)
 app.include_router(inventario_router)
 app.include_router(venta_router)
 app.include_router(pago_router)
+app.include_router(movimiento_saldo_router)
+app.include_router(prestamo_router)
+app.include_router(deuda_router)
 
 
 @app.get("/")
