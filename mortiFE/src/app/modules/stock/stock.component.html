@@ -1,75 +1,90 @@
 <!-- Header Section -->
 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
     <div>
-        <h1 class="text-3xl font-bold text-white mb-1">Control de Stock</h1>
-        <p class="text-gray-500 font-light text-sm">Gestiona entradas y salidas de inventario en tiempo real.</p>
+        <h1 class="text-3xl font-bold text-white mb-1">Historial de Stock</h1>
+        <p class="text-gray-500 font-light text-sm">Monitorea cada entrada, salida y ajuste de tu inventario.</p>
     </div>
     <div class="flex items-center gap-3">
-        <button class="btn-primary flex items-center gap-2 text-sm">
+        <button class="bg-white/5 hover:bg-white/10 text-white border border-white/10 px-4 py-2 rounded-xl transition-all flex items-center gap-2 text-sm">
+            <i class="bi bi-download"></i>
+            Exportar
+        </button>
+        <button (click)="openMovimientoDrawer()" class="btn-primary flex items-center gap-2 text-sm">
             <i class="bi bi-plus-lg"></i>
             Nuevo Movimiento
         </button>
     </div>
 </div>
 
-<!-- Stats Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-    <div class="glass p-6 rounded-2xl group">
-        <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500">
-                <i class="bi bi-arrow-down-circle text-2xl"></i>
+<!-- KPI Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+    <div class="glass p-6 rounded-3xl relative overflow-hidden group">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-500">
+                <i class="bi bi-arrow-down-left text-2xl"></i>
             </div>
-            <span class="text-xs font-medium text-green-500 bg-green-500/10 px-2 py-1 rounded-lg">+12.5%</span>
+            <div>
+                <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold">Total Entradas</p>
+                <h3 class="text-2xl font-bold text-white">{{ totalEntradas }} <span class="text-xs font-light text-gray-500 uppercase">uds</span></h3>
+            </div>
         </div>
-        <h3 class="text-gray-500 text-sm font-medium mb-1">Entradas Hoy</h3>
-        <p class="text-2xl font-bold text-white">24</p>
     </div>
-    <div class="glass p-6 rounded-2xl group">
-        <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500">
-                <i class="bi bi-arrow-up-circle text-2xl"></i>
+    <div class="glass p-6 rounded-3xl relative overflow-hidden group">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500">
+                <i class="bi bi-arrow-up-right text-2xl"></i>
             </div>
-            <span class="text-xs font-medium text-gray-500 bg-white/5 px-2 py-1 rounded-lg">23 total</span>
+            <div>
+                <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold">Total Salidas</p>
+                <h3 class="text-2xl font-bold text-white">{{ totalSalidas }} <span class="text-xs font-light text-gray-500 uppercase">uds</span></h3>
+            </div>
         </div>
-        <h3 class="text-gray-500 text-sm font-medium mb-1">Salidas Hoy</h3>
-        <p class="text-2xl font-bold text-white">18</p>
     </div>
-    <div class="glass p-6 rounded-2xl group">
-        <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500">
-                <i class="bi bi-boxes text-2xl"></i>
+    <div class="glass p-6 rounded-3xl relative overflow-hidden group">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500">
+                <i class="bi bi-box-seam text-2xl"></i>
             </div>
-            <span class="text-xs font-medium text-green-500 bg-green-500/10 px-2 py-1 rounded-lg">+8.2%</span>
-        </div>
-        <h3 class="text-gray-500 text-sm font-medium mb-1">Stock Total</h3>
-        <p class="text-2xl font-bold text-white">232</p>
-    </div>
-    <div class="glass p-6 rounded-2xl group">
-        <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-500">
-                <i class="bi bi-currency-dollar text-2xl"></i>
+            <div>
+                <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold">Stock Total</p>
+                <h3 class="text-2xl font-bold text-white">
+                    {{ stockTotal }} <span class="text-xs font-light text-gray-500 uppercase">uds</span>
+                </h3>
             </div>
         </div>
-        <h3 class="text-gray-500 text-sm font-medium mb-1">Valor Total</h3>
-        <p class="text-2xl font-bold text-white">$128.2K</p>
     </div>
 </div>
 
-<!-- Filters -->
-<div class="glass p-4 rounded-2xl mb-8 flex flex-col lg:flex-row gap-4 items-center">
+<!-- Filters and Search Bar -->
+<div class="glass p-4 rounded-2xl mb-8 flex flex-col lg:flex-row gap-4 items-center !hover:bg-transparent">
     <div class="relative flex-1 w-full">
         <i class="bi bi-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
-        <input type="text" class="input-field w-full pl-12 py-2.5 text-sm" placeholder="Buscar movimientos...">
+        <input 
+            type="text" 
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="applyFilters()"
+            class="input-field w-full pl-12 pr-4 py-2.5 text-sm" 
+            placeholder="Buscar por producto o motivo...">
     </div>
-    <div class="flex items-center gap-2">
-        <button class="px-4 py-2 text-sm rounded-xl bg-blue-600 text-white font-medium">Todos</button>
-        <button class="px-4 py-2 text-sm rounded-xl hover:bg-white/5 text-gray-400 transition-all">Entradas</button>
-        <button class="px-4 py-2 text-sm rounded-xl hover:bg-white/5 text-gray-400 transition-all">Salidas</button>
+    <div class="flex items-center gap-2 w-full lg:w-auto">
+        <div class="relative flex-1 lg:flex-none">
+            <select 
+                [(ngModel)]="filtroTipo"
+                (change)="applyFilters()"
+                class="input-field appearance-none pl-4 pr-10 py-2.5 text-sm w-full lg:w-48 bg-[#18181b] cursor-pointer">
+                <option value="todos">Todos los tipos</option>
+                <option value="entrada">Entradas</option>
+                <option value="salida">Salidas</option>
+                <option value="ajuste_entrada">Ajuste Entrada (+)</option>
+                <option value="ajuste_salida">Ajuste Salida (-)</option>
+            </select>
+            <i class="bi bi-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-xs"></i>
+        </div>
     </div>
 </div>
 
 <!-- Table Section -->
-<div class="glass rounded-3xl overflow-hidden shadow-2xl">
+<div class="glass rounded-3xl overflow-hidden shadow-xl shadow-black/20">
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
             <thead>
@@ -78,70 +93,47 @@
                     <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Producto</th>
                     <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Tipo</th>
                     <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Cantidad</th>
-                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Usuario</th>
                     <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Motivo</th>
-                    <th class="px-6 py-5 text-xs font-semibold text-gray-400 uppercase tracking-wider text-right">Acciones</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-white/5">
-                <tr class="hover:bg-white/[0.02] transition-colors">
+                <tr *ngFor="let m of filteredMovimientos" class="hover:bg-white/[0.01] transition-colors group">
                     <td class="px-6 py-4">
                         <div class="flex flex-col">
-                            <span class="text-sm font-medium text-white">22/09/2025</span>
-                            <span class="text-[10px] text-gray-500">14:30</span>
+                            <span class="text-sm text-white font-medium">{{ m.fecha_movimiento | date:'dd/MM/yyyy' }}</span>
+                            <span class="text-[10px] text-gray-500 uppercase">{{ m.fecha_movimiento | date:'HH:mm:ss' }}</span>
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        <div>
-                            <p class="text-sm font-semibold text-white">Laptop Dell XPS 13</p>
-                            <p class="text-[10px] font-mono text-gray-500 uppercase tracking-tighter">SKU: LPT-001</p>
-                        </div>
+                        <span class="text-sm font-semibold text-white">{{ m.nombre_producto }}</span>
                     </td>
                     <td class="px-6 py-4">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-green-500/10 text-green-500 uppercase tracking-wide">
-                            Entrada
+                        <span 
+                            [ngClass]="isPositive(m.tipo_movimiento) ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500'"
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                            {{ getTipoLabel(m.tipo_movimiento) }}
                         </span>
                     </td>
-                    <td class="px-6 py-4">
-                        <span class="text-sm font-bold text-green-400">+15</span>
+                    <td class="px-6 py-4 font-bold text-sm" [ngClass]="isPositive(m.tipo_movimiento) ? 'text-green-500' : 'text-red-500'">
+                        {{ isPositive(m.tipo_movimiento) ? '+' : '-' }}{{ m.cantidad }}
                     </td>
-                    <td class="px-6 py-4 text-sm text-gray-300">Juan Pérez</td>
-                    <td class="px-6 py-4 text-sm text-gray-500 italic">Compra a proveedor</td>
-                    <td class="px-6 py-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                            <button class="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-all"><i class="bi bi-eye"></i></button>
-                            <button class="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-all"><i class="bi bi-pencil-square"></i></button>
-                        </div>
+                    <td class="px-6 py-4">
+                        <span class="text-sm text-gray-400 font-light">{{ m.motivo }}</span>
                     </td>
                 </tr>
-                <tr class="hover:bg-white/[0.02] transition-colors">
-                    <td class="px-6 py-4">
-                        <div class="flex flex-col">
-                            <span class="text-sm font-medium text-white">22/09/2025</span>
-                            <span class="text-[10px] text-gray-500">13:15</span>
-                        </div>
+                
+                <!-- Empty State -->
+                <tr *ngIf="filteredMovimientos.length === 0 && !isLoading">
+                    <td colspan="5" class="px-6 py-20 text-center text-gray-500">
+                        <i class="bi bi-clock-history text-4xl mb-4 block opacity-20"></i>
+                        No hay movimientos registrados.
                     </td>
-                    <td class="px-6 py-4">
-                        <div>
-                            <p class="text-sm font-semibold text-white">iPhone 15 Pro</p>
-                            <p class="text-[10px] font-mono text-gray-500 uppercase tracking-tighter">SKU: IPH-015</p>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-red-500/10 text-red-500 uppercase tracking-wide">
-                            Salida
-                        </span>
-                    </td>
-                    <td class="px-6 py-4">
-                        <span class="text-sm font-bold text-red-400">-3</span>
-                    </td>
-                    <td class="px-6 py-4 text-sm text-gray-300">María García</td>
-                    <td class="px-6 py-4 text-sm text-gray-500 italic">Venta cliente</td>
-                    <td class="px-6 py-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                            <button class="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-all"><i class="bi bi-eye"></i></button>
-                            <button class="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-all"><i class="bi bi-pencil-square"></i></button>
-                        </div>
+                </tr>
+
+                <!-- Loading State -->
+                <tr *ngIf="isLoading">
+                    <td colspan="5" class="px-6 py-20 text-center">
+                        <span class="spinner !w-8 !h-8 !border-4 !border-blue-600 !border-r-transparent"></span>
                     </td>
                 </tr>
             </tbody>

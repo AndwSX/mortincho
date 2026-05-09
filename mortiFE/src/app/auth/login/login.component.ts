@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -17,27 +18,27 @@ export class LoginComponent {
     password: ''
   };
   isLoading = false;
-  errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private notify: NotificationService
+  ) {}
 
   onLogin() {
     if (this.isLoading) return;
     this.isLoading = true;
-    this.errorMessage = '';
     
     this.authService.login(this.loginData).subscribe({
-      next: (response) => {
-        console.log('Login exitoso', response);
-        // Guardamos el token
+      next: (response: any) => {
         this.authService.setToken(response.access_token);
         this.isLoading = false;
-        this.router.navigate(['/app']);
+        this.notify.success('¡Bienvenido de nuevo!');
+        this.router.navigate(['/app/dashboard']);
       },
-      error: (err) => {
-        console.error('Error en login', err);
+      error: (err: any) => {
         this.isLoading = false;
-        this.errorMessage = 'Usuario o contraseña incorrectos. Inténtalo de nuevo.';
+        this.notify.error('Error al iniciar sesión. Revisa tus datos.');
       }
     });
   }

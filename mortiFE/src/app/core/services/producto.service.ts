@@ -31,11 +31,30 @@ export class ProductoService {
   }
 
   /**
-   * Cambia el estado de un producto (Activar/Desactivar).
-   * @param id ID del producto.
+   * Obtiene un producto por ID.
    */
-  toggleEstado(id: number): Observable<any> {
-    // Asumiendo que hay un endpoint para esto o que se hace vía PATCH
-    return this.http.patch(`${this.apiUrl}/productos/${id}/toggle`, {});
+  getProducto(id: number): Observable<Producto> {
+    return this.http.get<Producto>(`${this.apiUrl}/productos/${id}`);
+  }
+
+  /**
+   * Crea un nuevo producto.
+   */
+  createProducto(producto: { nombre: string; descripcion: string }): Observable<Producto> {
+    return this.http.post<Producto>(`${this.apiUrl}/productos/`, producto);
+  }
+
+  /**
+   * Actualiza un producto existente.
+   */
+  updateProducto(id: number, producto: { nombre: string; descripcion: string }): Observable<Producto> {
+    return this.http.put<Producto>(`${this.apiUrl}/productos/${id}`, producto);
+  }
+
+  /**
+   * Cambia el estado (activo/inactivo) de un producto.
+   */
+  cambiarEstado(id: number, activo: boolean): Observable<Producto> {
+    return this.http.patch<Producto>(`${this.apiUrl}/productos/${id}/estado`, { activo });
   }
 }

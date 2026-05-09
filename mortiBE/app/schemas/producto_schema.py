@@ -13,6 +13,10 @@ class ProductoUpdate(BaseModel):
     descripcion: Optional[str] = None
 
 
+class ProductoEstado(BaseModel):
+    activo: bool
+
+
 class ProductoResponse(BaseModel):
     id_producto: int
     id_usuario: int

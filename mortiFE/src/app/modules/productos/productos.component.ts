@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductoService, Producto } from '../../core/services/producto.service';
+import { UiService } from '../../core/services/ui.service';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Component({
   selector: 'app-productos',
@@ -17,10 +19,19 @@ export class ProductosComponent implements OnInit {
   soloActivos: boolean = false;
   isLoading: boolean = false;
 
-  constructor(private productoService: ProductoService) {}
+  constructor(
+    private productoService: ProductoService,
+    private uiService: UiService,
+    private notify: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.loadProductos();
+
+    // Escuchar cuando se guarde un producto desde el drawer global
+    this.uiService.productSaved$.subscribe(() => {
+      this.loadProductos();
+    });
   }
 
   loadProductos(): void {
@@ -54,15 +65,26 @@ export class ProductosComponent implements OnInit {
     this.loadProductos();
   }
 
+  openCreateDrawer(): void {
+    this.uiService.openDrawer('producto', 'create');
+  }
+
+  openEditDrawer(producto: Producto): void {
+    this.uiService.openDrawer('producto', 'edit', producto);
+  }
+
   toggleEstado(producto: Producto): void {
-    // Para propósitos de demostración, cambiaremos el estado localmente
-    // ya que no confirmamos si el endpoint de toggle existe en el backend real.
-    // Pero la lógica de llamada al servicio sería esta:
-    /*
-    this.productoService.toggleEstado(producto.id_producto).subscribe(() => {
-      producto.activo = !producto.activo;
+    const nuevoEstado = !producto.activo;
+    
+    this.productoService.cambiarEstado(producto.id_producto, nuevoEstado).subscribe({
+      next: () => {
+        producto.activo = nuevoEstado;
+        this.notify.success(nuevoEstado ? 'Producto activado' : 'Producto desactivado');
+      },
+      error: (err: any) => {
+        this.notify.error('Error al cambiar el estado del producto');
+        console.error(err);
+      }
     });
-    */
-    producto.activo = !producto.activo;
   }
 }

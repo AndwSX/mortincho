@@ -60,11 +60,12 @@ def actualizar_producto(
     return producto
 
 
-def desactivar_producto(
+def cambiar_estado_producto(
     db: Session,
-    producto: Producto
+    producto: Producto,
+    nuevo_estado: bool
 ) -> Producto:
-    producto.activo = False
+    producto.activo = nuevo_estado
     db.commit()
     db.refresh(producto)
     return producto

@@ -8,6 +8,7 @@ from app.models.usuario_model import Usuario
 from app.schemas.producto_schema import (
     ProductoCreate,
     ProductoUpdate,
+    ProductoEstado,
     ProductoResponse
 )
 from app.services.producto_service import (
@@ -15,7 +16,7 @@ from app.services.producto_service import (
     obtener_productos,
     obtener_producto,
     actualizar_producto,
-    desactivar_producto
+    cambiar_estado_producto
 )
 
 router = APIRouter(
@@ -104,14 +105,15 @@ def actualizar(
 
 
 # ─────────────────────────────────────────
-# PATCH /productos/{id}/desactivar  →  Soft delete
+# PATCH /productos/{id}/estado  →  Activar/Desactivar
 # ─────────────────────────────────────────
 @router.patch(
-    "/{id_producto}/desactivar",
+    "/{id_producto}/estado",
     response_model=ProductoResponse
 )
-def desactivar(
+def cambiar_estado(
     id_producto: int,
+    datos: ProductoEstado,
     db: Session = Depends(get_db),
     current_user: Usuario = Depends(get_current_user)
 ):
@@ -121,9 +123,12 @@ def desactivar(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Producto no encontrado"
         )
-    if not producto.activo:
+    
+    if producto.activo == datos.activo:
+        estado_str = "activo" if datos.activo else "desactivado"
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="El producto ya está desactivado"
+            detail=f"El producto ya está {estado_str}"
         )
-    return desactivar_producto(db, producto)
+        
+    return cambiar_estado_producto(db, producto, datos.activo)

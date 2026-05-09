@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../core/services/auth.service';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Component({
   selector: 'app-registro',
@@ -19,26 +20,27 @@ export class RegistroComponent {
   };
 
   isLoading: boolean = false;
-  errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private notify: NotificationService
+  ) {}
 
   onRegistro() {
     if (this.isLoading) return;
     
     this.isLoading = true;
-    this.errorMessage = '';
 
     this.authService.register(this.userData).subscribe({
       next: (response) => {
-        console.log('Registro exitoso', response);
         this.isLoading = false;
+        this.notify.success('¡Registro exitoso! Ya puedes iniciar sesión.');
         this.router.navigate(['/auth/login']);
       },
       error: (err) => {
-        console.error('Error en registro', err);
         this.isLoading = false;
-        this.errorMessage = 'Ocurrió un error al registrar el usuario. Inténtalo de nuevo.';
+        this.notify.error('No se pudo completar el registro. Revisa los datos.');
       }
     });
   }

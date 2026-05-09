@@ -15,11 +15,39 @@
         </header>
 
         <!-- Content Scroll Area -->
-        <main class="flex-1 overflow-y-auto p-6 md:p-10 relative z-10 custom-scrollbar">
+        <main 
+            [ngClass]="isDrawerOpen ? 'z-[100]' : 'z-10'"
+            class="flex-1 overflow-y-auto p-6 md:p-10 relative custom-scrollbar transition-all duration-300">
             <!-- Fade-in container for router outlet -->
             <div class="max-w-7xl mx-auto animate-fadeIn">
                 <router-outlet></router-outlet>
             </div>
         </main>
     </div>
+
+    <!-- Global Slide-over Drawer (The Shell) -->
+    <app-shared-drawer 
+        [isOpen]="isDrawerOpen" 
+        [title]="drawerTitle" 
+        [subtitle]="drawerSubtitle"
+        (close)="closeDrawer()">
+        
+        <!-- Module-specific content -->
+        <app-producto-drawer 
+            *ngIf="drawerType === 'producto'"
+            [mode]="drawerMode"
+            [form]="drawerData"
+            (saved)="handleSaved()"
+            (cancelled)="closeDrawer()">
+        </app-producto-drawer>
+
+        <app-movimiento-drawer
+            *ngIf="drawerType === 'movimiento'"
+            (saved)="handleSaved()"
+            (cancelled)="closeDrawer()">
+        </app-movimiento-drawer>
+
+        <!-- (Future drawers for other modules will go here) -->
+
+    </app-shared-drawer>
 </div>

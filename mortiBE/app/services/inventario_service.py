@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from typing import Optional
 from sqlalchemy.exc import SQLAlchemyError
 from fastapi import HTTPException, status
 from app.models.inventario_movimiento_model import InventarioMovimiento
@@ -70,3 +71,19 @@ def registrar_movimientos_batch(db: Session, datos: InventarioMovimientoCreate, 
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error inesperado: {str(e)}"
         )
+
+
+def obtener_movimientos(
+    db: Session,
+    id_usuario: int,
+    id_producto: Optional[int] = None,
+    limit: int = 100
+):
+    query = db.query(InventarioMovimiento).filter(
+        InventarioMovimiento.id_usuario == id_usuario
+    )
+    
+    if id_producto:
+        query = query.filter(InventarioMovimiento.id_producto == id_producto)
+        
+    return query.order_by(InventarioMovimiento.fecha_movimiento.desc()).limit(limit).all()
